@@ -1,11 +1,10 @@
 {
-  "name": "learnsphere-backend",
+  "name": "learnsphere-backend---copy",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,7 @@
     "helmet": "^8.1.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.1.9"
+    "multer": "^1.4.5-lts.2"
   },
   "devDependencies": {
     "prisma": "^6.6.0"

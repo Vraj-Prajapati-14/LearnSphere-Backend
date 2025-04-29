@@ -15,44 +15,83 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  role      String   // "Student" or "Instructor"
-  createdAt DateTime @default(now())
-  courses   Course[] @relation("InstructorCourses")
-  enrollments Enrollment[]
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  password      String
+  role          String
+  createdAt     DateTime       @default(now())
+  name          String
+  updatedAt     DateTime       @updatedAt
+  courses       Course[]       @relation("InstructorCourses")
+  enrollments   Enrollment[]
+  progress      Progress[]
+  refreshTokens RefreshToken[] @relation("UserRefreshTokens")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  courses     Course[]
 }
 
 model Course {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  category    String
+  id           Int          @id @default(autoincrement())
+  title        String
+  description  String?
   instructorId Int
-  instructor  User     @relation("InstructorCourses", fields: [instructorId], references: [id])
-  isPublished Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  sessions    Session[]
-  enrollments Enrollment[]
+  isPublished  Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  categoryId   Int?
+  updatedAt    DateTime     @updatedAt
+  image        String?
+  category     Category?    @relation(fields: [categoryId], references: [id])
+  instructor   User         @relation("InstructorCourses", fields: [instructorId], references: [id])
+  enrollments  Enrollment[]
+  sessions     Session[]
 }
 
 model Session {
-  id          Int      @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   title       String
   youtubeLink String
-  explanation String   // Rich text content
+  explanation String
   courseId    Int
-  course      Course   @relation(fields: [courseId], references: [id])
-  createdAt   DateTime @default(now())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  progress    Progress[]
+  course      Course     @relation(fields: [courseId], references: [id])
 }
 
 model Enrollment {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  courseId          Int
+  completedSessions Int[]    @default([])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  course            Course   @relation(fields: [courseId], references: [id])
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+model Progress {
   id          Int      @id @default(autoincrement())
   userId      Int
-  courseId    Int
-  user        User     @relation(fields: [userId], references: [id])
-  course      Course   @relation(fields: [courseId], references: [id])
-  completedSessions Int[]  // Array of session IDs marked as completed
+  sessionId   Int
+  isCompleted Boolean  @default(false)
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  session     Session  @relation(fields: [sessionId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      User     @relation("UserRefreshTokens", fields: [userId], references: [id]) // <-- Same relation name here
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }

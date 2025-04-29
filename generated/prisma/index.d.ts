@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Category
+ * 
+ */
+export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
+/**
  * Model Course
  * 
  */
@@ -33,6 +38,16 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  * 
  */
 export type Enrollment = $Result.DefaultSelection<Prisma.$EnrollmentPayload>
+/**
+ * Model Progress
+ * 
+ */
+export type Progress = $Result.DefaultSelection<Prisma.$ProgressPayload>
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -170,6 +185,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.category`: Exposes CRUD operations for the **Category** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.category.findMany()
+    * ```
+    */
+  get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.course`: Exposes CRUD operations for the **Course** model.
     * Example usage:
     * ```ts
@@ -198,6 +223,26 @@ export class PrismaClient<
     * ```
     */
   get enrollment(): Prisma.EnrollmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.progress`: Exposes CRUD operations for the **Progress** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Progresses
+    * const progresses = await prisma.progress.findMany()
+    * ```
+    */
+  get progress(): Prisma.ProgressDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RefreshTokens
+    * const refreshTokens = await prisma.refreshToken.findMany()
+    * ```
+    */
+  get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -639,9 +684,12 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Category: 'Category',
     Course: 'Course',
     Session: 'Session',
-    Enrollment: 'Enrollment'
+    Enrollment: 'Enrollment',
+    Progress: 'Progress',
+    RefreshToken: 'RefreshToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +708,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "course" | "session" | "enrollment"
+      modelProps: "user" | "category" | "course" | "session" | "enrollment" | "progress" | "refreshToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -735,6 +783,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Category: {
+        payload: Prisma.$CategoryPayload<ExtArgs>
+        fields: Prisma.CategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.CategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findMany: {
+            args: Prisma.CategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          create: {
+            args: Prisma.CategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          createMany: {
+            args: Prisma.CategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.CategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          update: {
+            args: Prisma.CategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.CategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.CategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.CategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategory>
+          }
+          groupBy: {
+            args: Prisma.CategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<CategoryCountAggregateOutputType> | number
           }
         }
       }
@@ -960,6 +1082,154 @@ export namespace Prisma {
           }
         }
       }
+      Progress: {
+        payload: Prisma.$ProgressPayload<ExtArgs>
+        fields: Prisma.ProgressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProgressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProgressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          findFirst: {
+            args: Prisma.ProgressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProgressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          findMany: {
+            args: Prisma.ProgressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
+          }
+          create: {
+            args: Prisma.ProgressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          createMany: {
+            args: Prisma.ProgressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProgressCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
+          }
+          delete: {
+            args: Prisma.ProgressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          update: {
+            args: Prisma.ProgressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProgressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProgressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProgressUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProgressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
+          }
+          aggregate: {
+            args: Prisma.ProgressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProgress>
+          }
+          groupBy: {
+            args: Prisma.ProgressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProgressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProgressCountArgs<ExtArgs>
+            result: $Utils.Optional<ProgressCountAggregateOutputType> | number
+          }
+        }
+      }
+      RefreshToken: {
+        payload: Prisma.$RefreshTokenPayload<ExtArgs>
+        fields: Prisma.RefreshTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findMany: {
+            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          create: {
+            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          createMany: {
+            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          update: {
+            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefreshToken>
+          }
+          groupBy: {
+            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefreshTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1045,9 +1315,12 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    category?: CategoryOmit
     course?: CourseOmit
     session?: SessionOmit
     enrollment?: EnrollmentOmit
+    progress?: ProgressOmit
+    refreshToken?: RefreshTokenOmit
   }
 
   /* Types for Logging */
@@ -1144,11 +1417,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     courses: number
     enrollments: number
+    progress: number
+    refreshTokens: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     courses?: boolean | UserCountOutputTypeCountCoursesArgs
     enrollments?: boolean | UserCountOutputTypeCountEnrollmentsArgs
+    progress?: boolean | UserCountOutputTypeCountProgressArgs
+    refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   }
 
   // Custom InputTypes
@@ -1176,19 +1453,64 @@ export namespace Prisma {
     where?: EnrollmentWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProgressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgressWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
+  }
+
+
+  /**
+   * Count Type CategoryCountOutputType
+   */
+
+  export type CategoryCountOutputType = {
+    courses: number
+  }
+
+  export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    courses?: boolean | CategoryCountOutputTypeCountCoursesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategoryCountOutputType
+     */
+    select?: CategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourseWhereInput
+  }
+
 
   /**
    * Count Type CourseCountOutputType
    */
 
   export type CourseCountOutputType = {
-    sessions: number
     enrollments: number
+    sessions: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | CourseCountOutputTypeCountSessionsArgs
     enrollments?: boolean | CourseCountOutputTypeCountEnrollmentsArgs
+    sessions?: boolean | CourseCountOutputTypeCountSessionsArgs
   }
 
   // Custom InputTypes
@@ -1205,15 +1527,46 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
+  export type CourseCountOutputTypeCountEnrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnrollmentWhereInput
   }
 
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountEnrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnrollmentWhereInput
+  export type CourseCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+  }
+
+
+  /**
+   * Count Type SessionCountOutputType
+   */
+
+  export type SessionCountOutputType = {
+    progress: number
+  }
+
+  export type SessionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    progress?: boolean | SessionCountOutputTypeCountProgressArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SessionCountOutputType without action
+   */
+  export type SessionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SessionCountOutputType
+     */
+    select?: SessionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SessionCountOutputType without action
+   */
+  export type SessionCountOutputTypeCountProgressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgressWhereInput
   }
 
 
@@ -1247,6 +1600,8 @@ export namespace Prisma {
     password: string | null
     role: string | null
     createdAt: Date | null
+    name: string | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1255,6 +1610,8 @@ export namespace Prisma {
     password: string | null
     role: string | null
     createdAt: Date | null
+    name: string | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1263,6 +1620,8 @@ export namespace Prisma {
     password: number
     role: number
     createdAt: number
+    name: number
+    updatedAt: number
     _all: number
   }
 
@@ -1281,6 +1640,8 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    name?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1289,6 +1650,8 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    name?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1297,6 +1660,8 @@ export namespace Prisma {
     password?: true
     role?: true
     createdAt?: true
+    name?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1392,6 +1757,8 @@ export namespace Prisma {
     password: string
     role: string
     createdAt: Date
+    name: string
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1419,8 +1786,12 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    name?: boolean
+    updatedAt?: boolean
     courses?: boolean | User$coursesArgs<ExtArgs>
     enrollments?: boolean | User$enrollmentsArgs<ExtArgs>
+    progress?: boolean | User$progressArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1430,6 +1801,8 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    name?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1438,6 +1811,8 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    name?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1446,12 +1821,16 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     createdAt?: boolean
+    name?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "role" | "createdAt" | "name" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     courses?: boolean | User$coursesArgs<ExtArgs>
     enrollments?: boolean | User$enrollmentsArgs<ExtArgs>
+    progress?: boolean | User$progressArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1462,6 +1841,8 @@ export namespace Prisma {
     objects: {
       courses: Prisma.$CoursePayload<ExtArgs>[]
       enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
+      progress: Prisma.$ProgressPayload<ExtArgs>[]
+      refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1469,6 +1850,8 @@ export namespace Prisma {
       password: string
       role: string
       createdAt: Date
+      name: string
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1865,6 +2248,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     courses<T extends User$coursesArgs<ExtArgs> = {}>(args?: Subset<T, User$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends User$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    progress<T extends User$progressArgs<ExtArgs> = {}>(args?: Subset<T, User$progressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1899,6 +2284,8 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2335,6 +2722,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.progress
+   */
+  export type User$progressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    where?: ProgressWhereInput
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    cursor?: ProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+  }
+
+  /**
+   * User.refreshTokens
+   */
+  export type User$refreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    cursor?: RefreshTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2354,6 +2789,1110 @@ export namespace Prisma {
 
 
   /**
+   * Model Category
+   */
+
+  export type AggregateCategory = {
+    _count: CategoryCountAggregateOutputType | null
+    _avg: CategoryAvgAggregateOutputType | null
+    _sum: CategorySumAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  export type CategoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CategorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CategoryMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CategoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type CategorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type CategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Category to aggregate.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Categories
+    **/
+    _count?: true | CategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type GetCategoryAggregateType<T extends CategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategory[P]>
+      : GetScalarType<T[P], AggregateCategory[P]>
+  }
+
+
+
+
+  export type CategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategoryWhereInput
+    orderBy?: CategoryOrderByWithAggregationInput | CategoryOrderByWithAggregationInput[]
+    by: CategoryScalarFieldEnum[] | CategoryScalarFieldEnum
+    having?: CategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CategoryCountAggregateInputType | true
+    _avg?: CategoryAvgAggregateInputType
+    _sum?: CategorySumAggregateInputType
+    _min?: CategoryMinAggregateInputType
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type CategoryGroupByOutputType = {
+    id: number
+    name: string
+    description: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: CategoryCountAggregateOutputType | null
+    _avg: CategoryAvgAggregateOutputType | null
+    _sum: CategorySumAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    courses?: boolean | Category$coursesArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    courses?: boolean | Category$coursesArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Category"
+    objects: {
+      courses: Prisma.$CoursePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      description: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["category"]>
+    composites: {}
+  }
+
+  type CategoryGetPayload<S extends boolean | null | undefined | CategoryDefaultArgs> = $Result.GetResult<Prisma.$CategoryPayload, S>
+
+  type CategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CategoryCountAggregateInputType | true
+    }
+
+  export interface CategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Category'], meta: { name: 'Category' } }
+    /**
+     * Find zero or one Category that matches the filter.
+     * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CategoryFindUniqueArgs>(args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Category that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CategoryFindUniqueOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CategoryFindFirstArgs>(args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Categories
+     * const categories = await prisma.category.findMany()
+     * 
+     * // Get first 10 Categories
+     * const categories = await prisma.category.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const categoryWithIdOnly = await prisma.category.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CategoryFindManyArgs>(args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Category.
+     * @param {CategoryCreateArgs} args - Arguments to create a Category.
+     * @example
+     * // Create one Category
+     * const Category = await prisma.category.create({
+     *   data: {
+     *     // ... data to create a Category
+     *   }
+     * })
+     * 
+     */
+    create<T extends CategoryCreateArgs>(args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Categories.
+     * @param {CategoryCreateManyArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CategoryCreateManyArgs>(args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Categories and returns the data saved in the database.
+     * @param {CategoryCreateManyAndReturnArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Categories and only return the `id`
+     * const categoryWithIdOnly = await prisma.category.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Category.
+     * @param {CategoryDeleteArgs} args - Arguments to delete one Category.
+     * @example
+     * // Delete one Category
+     * const Category = await prisma.category.delete({
+     *   where: {
+     *     // ... filter to delete one Category
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CategoryDeleteArgs>(args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Category.
+     * @param {CategoryUpdateArgs} args - Arguments to update one Category.
+     * @example
+     * // Update one Category
+     * const category = await prisma.category.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CategoryUpdateArgs>(args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Categories.
+     * @param {CategoryDeleteManyArgs} args - Arguments to filter Categories to delete.
+     * @example
+     * // Delete a few Categories
+     * const { count } = await prisma.category.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CategoryDeleteManyArgs>(args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Categories
+     * const category = await prisma.category.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CategoryUpdateManyArgs>(args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories and returns the data updated in the database.
+     * @param {CategoryUpdateManyAndReturnArgs} args - Arguments to update many Categories.
+     * @example
+     * // Update many Categories
+     * const category = await prisma.category.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Categories and only return the `id`
+     * const categoryWithIdOnly = await prisma.category.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, CategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Category.
+     * @param {CategoryUpsertArgs} args - Arguments to update or create a Category.
+     * @example
+     * // Update or create a Category
+     * const category = await prisma.category.upsert({
+     *   create: {
+     *     // ... data to create a Category
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Category we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CategoryUpsertArgs>(args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryCountArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.category.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
+    count<T extends CategoryCountArgs>(
+      args?: Subset<T, CategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Prisma.PrismaPromise<GetCategoryAggregateType<T>>
+
+    /**
+     * Group by Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CategoryGroupByArgs['orderBy'] }
+        : { orderBy?: CategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Category model
+   */
+  readonly fields: CategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Category.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    courses<T extends Category$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Category$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Category model
+   */
+  interface CategoryFieldRefs {
+    readonly id: FieldRef<"Category", 'Int'>
+    readonly name: FieldRef<"Category", 'String'>
+    readonly description: FieldRef<"Category", 'String'>
+    readonly createdAt: FieldRef<"Category", 'DateTime'>
+    readonly updatedAt: FieldRef<"Category", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Category findUnique
+   */
+  export type CategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findUniqueOrThrow
+   */
+  export type CategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findFirst
+   */
+  export type CategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findFirstOrThrow
+   */
+  export type CategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findMany
+   */
+  export type CategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Categories to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category create
+   */
+  export type CategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Category.
+     */
+    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+  }
+
+  /**
+   * Category createMany
+   */
+  export type CategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Category createManyAndReturn
+   */
+  export type CategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Category update
+   */
+  export type CategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Category.
+     */
+    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+    /**
+     * Choose, which Category to update.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category updateMany
+   */
+  export type CategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Category updateManyAndReturn
+   */
+  export type CategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Category upsert
+   */
+  export type CategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Category to update in case it exists.
+     */
+    where: CategoryWhereUniqueInput
+    /**
+     * In case the Category found by the `where` argument doesn't exist, create a new Category with this data.
+     */
+    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+    /**
+     * In case the Category was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * Category delete
+   */
+  export type CategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter which Category to delete.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category deleteMany
+   */
+  export type CategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Categories to delete
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Category.courses
+   */
+  export type Category$coursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    where?: CourseWhereInput
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    cursor?: CourseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
+  }
+
+  /**
+   * Category without action
+   */
+  export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Course
    */
 
@@ -2368,41 +3907,49 @@ export namespace Prisma {
   export type CourseAvgAggregateOutputType = {
     id: number | null
     instructorId: number | null
+    categoryId: number | null
   }
 
   export type CourseSumAggregateOutputType = {
     id: number | null
     instructorId: number | null
+    categoryId: number | null
   }
 
   export type CourseMinAggregateOutputType = {
     id: number | null
     title: string | null
     description: string | null
-    category: string | null
     instructorId: number | null
     isPublished: boolean | null
     createdAt: Date | null
+    categoryId: number | null
+    updatedAt: Date | null
+    image: string | null
   }
 
   export type CourseMaxAggregateOutputType = {
     id: number | null
     title: string | null
     description: string | null
-    category: string | null
     instructorId: number | null
     isPublished: boolean | null
     createdAt: Date | null
+    categoryId: number | null
+    updatedAt: Date | null
+    image: string | null
   }
 
   export type CourseCountAggregateOutputType = {
     id: number
     title: number
     description: number
-    category: number
     instructorId: number
     isPublished: number
     createdAt: number
+    categoryId: number
+    updatedAt: number
+    image: number
     _all: number
   }
 
@@ -2410,41 +3957,49 @@ export namespace Prisma {
   export type CourseAvgAggregateInputType = {
     id?: true
     instructorId?: true
+    categoryId?: true
   }
 
   export type CourseSumAggregateInputType = {
     id?: true
     instructorId?: true
+    categoryId?: true
   }
 
   export type CourseMinAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    category?: true
     instructorId?: true
     isPublished?: true
     createdAt?: true
+    categoryId?: true
+    updatedAt?: true
+    image?: true
   }
 
   export type CourseMaxAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    category?: true
     instructorId?: true
     isPublished?: true
     createdAt?: true
+    categoryId?: true
+    updatedAt?: true
+    image?: true
   }
 
   export type CourseCountAggregateInputType = {
     id?: true
     title?: true
     description?: true
-    category?: true
     instructorId?: true
     isPublished?: true
     createdAt?: true
+    categoryId?: true
+    updatedAt?: true
+    image?: true
     _all?: true
   }
 
@@ -2537,11 +4092,13 @@ export namespace Prisma {
   export type CourseGroupByOutputType = {
     id: number
     title: string
-    description: string
-    category: string
+    description: string | null
     instructorId: number
     isPublished: boolean
     createdAt: Date
+    categoryId: number | null
+    updatedAt: Date
+    image: string | null
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -2567,13 +4124,16 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    category?: boolean
     instructorId?: boolean
     isPublished?: boolean
     createdAt?: boolean
+    categoryId?: boolean
+    updatedAt?: boolean
+    image?: boolean
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
-    sessions?: boolean | Course$sessionsArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
+    sessions?: boolean | Course$sessionsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -2581,10 +4141,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    category?: boolean
     instructorId?: boolean
     isPublished?: boolean
     createdAt?: boolean
+    categoryId?: boolean
+    updatedAt?: boolean
+    image?: boolean
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -2592,10 +4155,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    category?: boolean
     instructorId?: boolean
     isPublished?: boolean
     createdAt?: boolean
+    categoryId?: boolean
+    updatedAt?: boolean
+    image?: boolean
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -2603,41 +4169,49 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    category?: boolean
     instructorId?: boolean
     isPublished?: boolean
     createdAt?: boolean
+    categoryId?: boolean
+    updatedAt?: boolean
+    image?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "instructorId" | "isPublished" | "createdAt", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "instructorId" | "isPublished" | "createdAt" | "categoryId" | "updatedAt" | "image", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
-    sessions?: boolean | Course$sessionsArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
+    sessions?: boolean | Course$sessionsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Course$categoryArgs<ExtArgs>
     instructor?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
+      category: Prisma.$CategoryPayload<ExtArgs> | null
       instructor: Prisma.$UserPayload<ExtArgs>
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
       enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
-      description: string
-      category: string
+      description: string | null
       instructorId: number
       isPublished: boolean
       createdAt: Date
+      categoryId: number | null
+      updatedAt: Date
+      image: string | null
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -3032,9 +4606,10 @@ export namespace Prisma {
    */
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends Course$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     instructor<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    sessions<T extends Course$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Course$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends Course$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends Course$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Course$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3067,10 +4642,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Course", 'Int'>
     readonly title: FieldRef<"Course", 'String'>
     readonly description: FieldRef<"Course", 'String'>
-    readonly category: FieldRef<"Course", 'String'>
     readonly instructorId: FieldRef<"Course", 'Int'>
     readonly isPublished: FieldRef<"Course", 'Boolean'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
+    readonly categoryId: FieldRef<"Course", 'Int'>
+    readonly updatedAt: FieldRef<"Course", 'DateTime'>
+    readonly image: FieldRef<"Course", 'String'>
   }
     
 
@@ -3467,27 +5044,22 @@ export namespace Prisma {
   }
 
   /**
-   * Course.sessions
+   * Course.category
    */
-  export type Course$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Course$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Session
+     * Select specific fields to fetch from the Category
      */
-    select?: SessionSelect<ExtArgs> | null
+    select?: CategorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Session
+     * Omit specific fields from the Category
      */
-    omit?: SessionOmit<ExtArgs> | null
+    omit?: CategoryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
   }
 
   /**
@@ -3512,6 +5084,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EnrollmentScalarFieldEnum | EnrollmentScalarFieldEnum[]
+  }
+
+  /**
+   * Course.sessions
+   */
+  export type Course$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -3562,6 +5158,7 @@ export namespace Prisma {
     explanation: string | null
     courseId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SessionMaxAggregateOutputType = {
@@ -3571,6 +5168,7 @@ export namespace Prisma {
     explanation: string | null
     courseId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SessionCountAggregateOutputType = {
@@ -3580,6 +5178,7 @@ export namespace Prisma {
     explanation: number
     courseId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3601,6 +5200,7 @@ export namespace Prisma {
     explanation?: true
     courseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type SessionMaxAggregateInputType = {
@@ -3610,6 +5210,7 @@ export namespace Prisma {
     explanation?: true
     courseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type SessionCountAggregateInputType = {
@@ -3619,6 +5220,7 @@ export namespace Prisma {
     explanation?: true
     courseId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3715,6 +5317,7 @@ export namespace Prisma {
     explanation: string
     courseId: number
     createdAt: Date
+    updatedAt: Date
     _count: SessionCountAggregateOutputType | null
     _avg: SessionAvgAggregateOutputType | null
     _sum: SessionSumAggregateOutputType | null
@@ -3743,7 +5346,10 @@ export namespace Prisma {
     explanation?: boolean
     courseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
+    progress?: boolean | Session$progressArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    _count?: boolean | SessionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3753,6 +5359,7 @@ export namespace Prisma {
     explanation?: boolean
     courseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3763,6 +5370,7 @@ export namespace Prisma {
     explanation?: boolean
     courseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3773,11 +5381,14 @@ export namespace Prisma {
     explanation?: boolean
     courseId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "youtubeLink" | "explanation" | "courseId" | "createdAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "youtubeLink" | "explanation" | "courseId" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    progress?: boolean | Session$progressArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    _count?: boolean | SessionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
@@ -3789,6 +5400,7 @@ export namespace Prisma {
   export type $SessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Session"
     objects: {
+      progress: Prisma.$ProgressPayload<ExtArgs>[]
       course: Prisma.$CoursePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3798,6 +5410,7 @@ export namespace Prisma {
       explanation: string
       courseId: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["session"]>
     composites: {}
   }
@@ -4192,6 +5805,7 @@ export namespace Prisma {
    */
   export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    progress<T extends Session$progressArgs<ExtArgs> = {}>(args?: Subset<T, Session$progressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4228,6 +5842,7 @@ export namespace Prisma {
     readonly explanation: FieldRef<"Session", 'String'>
     readonly courseId: FieldRef<"Session", 'Int'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly updatedAt: FieldRef<"Session", 'DateTime'>
   }
     
 
@@ -4624,6 +6239,30 @@ export namespace Prisma {
   }
 
   /**
+   * Session.progress
+   */
+  export type Session$progressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    where?: ProgressWhereInput
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    cursor?: ProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+  }
+
+  /**
    * Session without action
    */
   export type SessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4673,6 +6312,7 @@ export namespace Prisma {
     userId: number | null
     courseId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EnrollmentMaxAggregateOutputType = {
@@ -4680,6 +6320,7 @@ export namespace Prisma {
     userId: number | null
     courseId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EnrollmentCountAggregateOutputType = {
@@ -4688,6 +6329,7 @@ export namespace Prisma {
     courseId: number
     completedSessions: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -4711,6 +6353,7 @@ export namespace Prisma {
     userId?: true
     courseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type EnrollmentMaxAggregateInputType = {
@@ -4718,6 +6361,7 @@ export namespace Prisma {
     userId?: true
     courseId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type EnrollmentCountAggregateInputType = {
@@ -4726,6 +6370,7 @@ export namespace Prisma {
     courseId?: true
     completedSessions?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4821,6 +6466,7 @@ export namespace Prisma {
     courseId: number
     completedSessions: number[]
     createdAt: Date
+    updatedAt: Date
     _count: EnrollmentCountAggregateOutputType | null
     _avg: EnrollmentAvgAggregateOutputType | null
     _sum: EnrollmentSumAggregateOutputType | null
@@ -4848,8 +6494,9 @@ export namespace Prisma {
     courseId?: boolean
     completedSessions?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["enrollment"]>
 
   export type EnrollmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4858,8 +6505,9 @@ export namespace Prisma {
     courseId?: boolean
     completedSessions?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["enrollment"]>
 
   export type EnrollmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4868,8 +6516,9 @@ export namespace Prisma {
     courseId?: boolean
     completedSessions?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["enrollment"]>
 
   export type EnrollmentSelectScalar = {
@@ -4878,27 +6527,28 @@ export namespace Prisma {
     courseId?: boolean
     completedSessions?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type EnrollmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "courseId" | "completedSessions" | "createdAt", ExtArgs["result"]["enrollment"]>
+  export type EnrollmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "courseId" | "completedSessions" | "createdAt" | "updatedAt", ExtArgs["result"]["enrollment"]>
   export type EnrollmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type EnrollmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type EnrollmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $EnrollmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Enrollment"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       course: Prisma.$CoursePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4906,6 +6556,7 @@ export namespace Prisma {
       courseId: number
       completedSessions: number[]
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["enrollment"]>
     composites: {}
   }
@@ -5300,8 +6951,8 @@ export namespace Prisma {
    */
   export interface Prisma__EnrollmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5336,6 +6987,7 @@ export namespace Prisma {
     readonly courseId: FieldRef<"Enrollment", 'Int'>
     readonly completedSessions: FieldRef<"Enrollment", 'Int[]'>
     readonly createdAt: FieldRef<"Enrollment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Enrollment", 'DateTime'>
   }
     
 
@@ -5751,6 +7403,2223 @@ export namespace Prisma {
 
 
   /**
+   * Model Progress
+   */
+
+  export type AggregateProgress = {
+    _count: ProgressCountAggregateOutputType | null
+    _avg: ProgressAvgAggregateOutputType | null
+    _sum: ProgressSumAggregateOutputType | null
+    _min: ProgressMinAggregateOutputType | null
+    _max: ProgressMaxAggregateOutputType | null
+  }
+
+  export type ProgressAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    sessionId: number | null
+  }
+
+  export type ProgressSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    sessionId: number | null
+  }
+
+  export type ProgressMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    sessionId: number | null
+    isCompleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProgressMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    sessionId: number | null
+    isCompleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProgressCountAggregateOutputType = {
+    id: number
+    userId: number
+    sessionId: number
+    isCompleted: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProgressAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    sessionId?: true
+  }
+
+  export type ProgressSumAggregateInputType = {
+    id?: true
+    userId?: true
+    sessionId?: true
+  }
+
+  export type ProgressMinAggregateInputType = {
+    id?: true
+    userId?: true
+    sessionId?: true
+    isCompleted?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProgressMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    sessionId?: true
+    isCompleted?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProgressCountAggregateInputType = {
+    id?: true
+    userId?: true
+    sessionId?: true
+    isCompleted?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProgressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Progress to aggregate.
+     */
+    where?: ProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Progresses to fetch.
+     */
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Progresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Progresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Progresses
+    **/
+    _count?: true | ProgressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProgressAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProgressSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProgressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProgressMaxAggregateInputType
+  }
+
+  export type GetProgressAggregateType<T extends ProgressAggregateArgs> = {
+        [P in keyof T & keyof AggregateProgress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProgress[P]>
+      : GetScalarType<T[P], AggregateProgress[P]>
+  }
+
+
+
+
+  export type ProgressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgressWhereInput
+    orderBy?: ProgressOrderByWithAggregationInput | ProgressOrderByWithAggregationInput[]
+    by: ProgressScalarFieldEnum[] | ProgressScalarFieldEnum
+    having?: ProgressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProgressCountAggregateInputType | true
+    _avg?: ProgressAvgAggregateInputType
+    _sum?: ProgressSumAggregateInputType
+    _min?: ProgressMinAggregateInputType
+    _max?: ProgressMaxAggregateInputType
+  }
+
+  export type ProgressGroupByOutputType = {
+    id: number
+    userId: number
+    sessionId: number
+    isCompleted: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ProgressCountAggregateOutputType | null
+    _avg: ProgressAvgAggregateOutputType | null
+    _sum: ProgressSumAggregateOutputType | null
+    _min: ProgressMinAggregateOutputType | null
+    _max: ProgressMaxAggregateOutputType | null
+  }
+
+  type GetProgressGroupByPayload<T extends ProgressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProgressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProgressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProgressGroupByOutputType[P]>
+            : GetScalarType<T[P], ProgressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProgressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sessionId?: boolean
+    isCompleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["progress"]>
+
+  export type ProgressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sessionId?: boolean
+    isCompleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["progress"]>
+
+  export type ProgressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sessionId?: boolean
+    isCompleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["progress"]>
+
+  export type ProgressSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    sessionId?: boolean
+    isCompleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "sessionId" | "isCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["progress"]>
+  export type ProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ProgressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ProgressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | SessionDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ProgressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Progress"
+    objects: {
+      session: Prisma.$SessionPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      sessionId: number
+      isCompleted: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["progress"]>
+    composites: {}
+  }
+
+  type ProgressGetPayload<S extends boolean | null | undefined | ProgressDefaultArgs> = $Result.GetResult<Prisma.$ProgressPayload, S>
+
+  type ProgressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProgressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProgressCountAggregateInputType | true
+    }
+
+  export interface ProgressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Progress'], meta: { name: 'Progress' } }
+    /**
+     * Find zero or one Progress that matches the filter.
+     * @param {ProgressFindUniqueArgs} args - Arguments to find a Progress
+     * @example
+     * // Get one Progress
+     * const progress = await prisma.progress.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProgressFindUniqueArgs>(args: SelectSubset<T, ProgressFindUniqueArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Progress that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProgressFindUniqueOrThrowArgs} args - Arguments to find a Progress
+     * @example
+     * // Get one Progress
+     * const progress = await prisma.progress.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProgressFindUniqueOrThrowArgs>(args: SelectSubset<T, ProgressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Progress that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressFindFirstArgs} args - Arguments to find a Progress
+     * @example
+     * // Get one Progress
+     * const progress = await prisma.progress.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProgressFindFirstArgs>(args?: SelectSubset<T, ProgressFindFirstArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Progress that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressFindFirstOrThrowArgs} args - Arguments to find a Progress
+     * @example
+     * // Get one Progress
+     * const progress = await prisma.progress.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProgressFindFirstOrThrowArgs>(args?: SelectSubset<T, ProgressFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Progresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Progresses
+     * const progresses = await prisma.progress.findMany()
+     * 
+     * // Get first 10 Progresses
+     * const progresses = await prisma.progress.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const progressWithIdOnly = await prisma.progress.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProgressFindManyArgs>(args?: SelectSubset<T, ProgressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Progress.
+     * @param {ProgressCreateArgs} args - Arguments to create a Progress.
+     * @example
+     * // Create one Progress
+     * const Progress = await prisma.progress.create({
+     *   data: {
+     *     // ... data to create a Progress
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProgressCreateArgs>(args: SelectSubset<T, ProgressCreateArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Progresses.
+     * @param {ProgressCreateManyArgs} args - Arguments to create many Progresses.
+     * @example
+     * // Create many Progresses
+     * const progress = await prisma.progress.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProgressCreateManyArgs>(args?: SelectSubset<T, ProgressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Progresses and returns the data saved in the database.
+     * @param {ProgressCreateManyAndReturnArgs} args - Arguments to create many Progresses.
+     * @example
+     * // Create many Progresses
+     * const progress = await prisma.progress.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Progresses and only return the `id`
+     * const progressWithIdOnly = await prisma.progress.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProgressCreateManyAndReturnArgs>(args?: SelectSubset<T, ProgressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Progress.
+     * @param {ProgressDeleteArgs} args - Arguments to delete one Progress.
+     * @example
+     * // Delete one Progress
+     * const Progress = await prisma.progress.delete({
+     *   where: {
+     *     // ... filter to delete one Progress
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProgressDeleteArgs>(args: SelectSubset<T, ProgressDeleteArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Progress.
+     * @param {ProgressUpdateArgs} args - Arguments to update one Progress.
+     * @example
+     * // Update one Progress
+     * const progress = await prisma.progress.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProgressUpdateArgs>(args: SelectSubset<T, ProgressUpdateArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Progresses.
+     * @param {ProgressDeleteManyArgs} args - Arguments to filter Progresses to delete.
+     * @example
+     * // Delete a few Progresses
+     * const { count } = await prisma.progress.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProgressDeleteManyArgs>(args?: SelectSubset<T, ProgressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Progresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Progresses
+     * const progress = await prisma.progress.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProgressUpdateManyArgs>(args: SelectSubset<T, ProgressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Progresses and returns the data updated in the database.
+     * @param {ProgressUpdateManyAndReturnArgs} args - Arguments to update many Progresses.
+     * @example
+     * // Update many Progresses
+     * const progress = await prisma.progress.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Progresses and only return the `id`
+     * const progressWithIdOnly = await prisma.progress.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProgressUpdateManyAndReturnArgs>(args: SelectSubset<T, ProgressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Progress.
+     * @param {ProgressUpsertArgs} args - Arguments to update or create a Progress.
+     * @example
+     * // Update or create a Progress
+     * const progress = await prisma.progress.upsert({
+     *   create: {
+     *     // ... data to create a Progress
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Progress we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProgressUpsertArgs>(args: SelectSubset<T, ProgressUpsertArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Progresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressCountArgs} args - Arguments to filter Progresses to count.
+     * @example
+     * // Count the number of Progresses
+     * const count = await prisma.progress.count({
+     *   where: {
+     *     // ... the filter for the Progresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProgressCountArgs>(
+      args?: Subset<T, ProgressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProgressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Progress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProgressAggregateArgs>(args: Subset<T, ProgressAggregateArgs>): Prisma.PrismaPromise<GetProgressAggregateType<T>>
+
+    /**
+     * Group by Progress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProgressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProgressGroupByArgs['orderBy'] }
+        : { orderBy?: ProgressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProgressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProgressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Progress model
+   */
+  readonly fields: ProgressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Progress.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProgressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    session<T extends SessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SessionDefaultArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Progress model
+   */
+  interface ProgressFieldRefs {
+    readonly id: FieldRef<"Progress", 'Int'>
+    readonly userId: FieldRef<"Progress", 'Int'>
+    readonly sessionId: FieldRef<"Progress", 'Int'>
+    readonly isCompleted: FieldRef<"Progress", 'Boolean'>
+    readonly createdAt: FieldRef<"Progress", 'DateTime'>
+    readonly updatedAt: FieldRef<"Progress", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Progress findUnique
+   */
+  export type ProgressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which Progress to fetch.
+     */
+    where: ProgressWhereUniqueInput
+  }
+
+  /**
+   * Progress findUniqueOrThrow
+   */
+  export type ProgressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which Progress to fetch.
+     */
+    where: ProgressWhereUniqueInput
+  }
+
+  /**
+   * Progress findFirst
+   */
+  export type ProgressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which Progress to fetch.
+     */
+    where?: ProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Progresses to fetch.
+     */
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Progresses.
+     */
+    cursor?: ProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Progresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Progresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Progresses.
+     */
+    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Progress findFirstOrThrow
+   */
+  export type ProgressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which Progress to fetch.
+     */
+    where?: ProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Progresses to fetch.
+     */
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Progresses.
+     */
+    cursor?: ProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Progresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Progresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Progresses.
+     */
+    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Progress findMany
+   */
+  export type ProgressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which Progresses to fetch.
+     */
+    where?: ProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Progresses to fetch.
+     */
+    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Progresses.
+     */
+    cursor?: ProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Progresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Progresses.
+     */
+    skip?: number
+    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Progress create
+   */
+  export type ProgressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Progress.
+     */
+    data: XOR<ProgressCreateInput, ProgressUncheckedCreateInput>
+  }
+
+  /**
+   * Progress createMany
+   */
+  export type ProgressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Progresses.
+     */
+    data: ProgressCreateManyInput | ProgressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Progress createManyAndReturn
+   */
+  export type ProgressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * The data used to create many Progresses.
+     */
+    data: ProgressCreateManyInput | ProgressCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Progress update
+   */
+  export type ProgressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Progress.
+     */
+    data: XOR<ProgressUpdateInput, ProgressUncheckedUpdateInput>
+    /**
+     * Choose, which Progress to update.
+     */
+    where: ProgressWhereUniqueInput
+  }
+
+  /**
+   * Progress updateMany
+   */
+  export type ProgressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Progresses.
+     */
+    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which Progresses to update
+     */
+    where?: ProgressWhereInput
+    /**
+     * Limit how many Progresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Progress updateManyAndReturn
+   */
+  export type ProgressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * The data used to update Progresses.
+     */
+    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which Progresses to update
+     */
+    where?: ProgressWhereInput
+    /**
+     * Limit how many Progresses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Progress upsert
+   */
+  export type ProgressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Progress to update in case it exists.
+     */
+    where: ProgressWhereUniqueInput
+    /**
+     * In case the Progress found by the `where` argument doesn't exist, create a new Progress with this data.
+     */
+    create: XOR<ProgressCreateInput, ProgressUncheckedCreateInput>
+    /**
+     * In case the Progress was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProgressUpdateInput, ProgressUncheckedUpdateInput>
+  }
+
+  /**
+   * Progress delete
+   */
+  export type ProgressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+    /**
+     * Filter which Progress to delete.
+     */
+    where: ProgressWhereUniqueInput
+  }
+
+  /**
+   * Progress deleteMany
+   */
+  export type ProgressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Progresses to delete
+     */
+    where?: ProgressWhereInput
+    /**
+     * Limit how many Progresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Progress without action
+   */
+  export type ProgressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Progress
+     */
+    select?: ProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Progress
+     */
+    omit?: ProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgressInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RefreshToken
+   */
+
+  export type AggregateRefreshToken = {
+    _count: RefreshTokenCountAggregateOutputType | null
+    _avg: RefreshTokenAvgAggregateOutputType | null
+    _sum: RefreshTokenSumAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  export type RefreshTokenAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type RefreshTokenSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type RefreshTokenMinAggregateOutputType = {
+    id: number | null
+    token: string | null
+    userId: number | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type RefreshTokenMaxAggregateOutputType = {
+    id: number | null
+    token: string | null
+    userId: number | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type RefreshTokenCountAggregateOutputType = {
+    id: number
+    token: number
+    userId: number
+    expiresAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RefreshTokenAvgAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type RefreshTokenSumAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type RefreshTokenMinAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type RefreshTokenMaxAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type RefreshTokenCountAggregateInputType = {
+    id?: true
+    token?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshToken to aggregate.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RefreshTokens
+    **/
+    _count?: true | RefreshTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RefreshTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RefreshTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefreshTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type GetRefreshTokenAggregateType<T extends RefreshTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefreshToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefreshToken[P]>
+      : GetScalarType<T[P], AggregateRefreshToken[P]>
+  }
+
+
+
+
+  export type RefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithAggregationInput | RefreshTokenOrderByWithAggregationInput[]
+    by: RefreshTokenScalarFieldEnum[] | RefreshTokenScalarFieldEnum
+    having?: RefreshTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefreshTokenCountAggregateInputType | true
+    _avg?: RefreshTokenAvgAggregateInputType
+    _sum?: RefreshTokenSumAggregateInputType
+    _min?: RefreshTokenMinAggregateInputType
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type RefreshTokenGroupByOutputType = {
+    id: number
+    token: string
+    userId: number
+    expiresAt: Date
+    createdAt: Date
+    _count: RefreshTokenCountAggregateOutputType | null
+    _avg: RefreshTokenAvgAggregateOutputType | null
+    _sum: RefreshTokenSumAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  type GetRefreshTokenGroupByPayload<T extends RefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefreshTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefreshTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectScalar = {
+    id?: boolean
+    token?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type RefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "expiresAt" | "createdAt", ExtArgs["result"]["refreshToken"]>
+  export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RefreshToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      token: string
+      userId: number
+      expiresAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["refreshToken"]>
+    composites: {}
+  }
+
+  type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
+
+  type RefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefreshTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefreshTokenCountAggregateInputType | true
+    }
+
+  export interface RefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshToken'], meta: { name: 'RefreshToken' } }
+    /**
+     * Find zero or one RefreshToken that matches the filter.
+     * @param {RefreshTokenFindUniqueArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RefreshTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany()
+     * 
+     * // Get first 10 RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RefreshToken.
+     * @param {RefreshTokenCreateArgs} args - Arguments to create a RefreshToken.
+     * @example
+     * // Create one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.create({
+     *   data: {
+     *     // ... data to create a RefreshToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RefreshTokens.
+     * @param {RefreshTokenCreateManyArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RefreshTokens and returns the data saved in the database.
+     * @param {RefreshTokenCreateManyAndReturnArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RefreshToken.
+     * @param {RefreshTokenDeleteArgs} args - Arguments to delete one RefreshToken.
+     * @example
+     * // Delete one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.delete({
+     *   where: {
+     *     // ... filter to delete one RefreshToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RefreshToken.
+     * @param {RefreshTokenUpdateArgs} args - Arguments to update one RefreshToken.
+     * @example
+     * // Update one RefreshToken
+     * const refreshToken = await prisma.refreshToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RefreshTokens.
+     * @param {RefreshTokenDeleteManyArgs} args - Arguments to filter RefreshTokens to delete.
+     * @example
+     * // Delete a few RefreshTokens
+     * const { count } = await prisma.refreshToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens and returns the data updated in the database.
+     * @param {RefreshTokenUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokens.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefreshTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RefreshToken.
+     * @param {RefreshTokenUpsertArgs} args - Arguments to update or create a RefreshToken.
+     * @example
+     * // Update or create a RefreshToken
+     * const refreshToken = await prisma.refreshToken.upsert({
+     *   create: {
+     *     // ... data to create a RefreshToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RefreshToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenCountArgs} args - Arguments to filter RefreshTokens to count.
+     * @example
+     * // Count the number of RefreshTokens
+     * const count = await prisma.refreshToken.count({
+     *   where: {
+     *     // ... the filter for the RefreshTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefreshTokenCountArgs>(
+      args?: Subset<T, RefreshTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefreshTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefreshTokenAggregateArgs>(args: Subset<T, RefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenAggregateType<T>>
+
+    /**
+     * Group by RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefreshTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefreshTokenGroupByArgs['orderBy'] }
+        : { orderBy?: RefreshTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RefreshToken model
+   */
+  readonly fields: RefreshTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RefreshToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RefreshToken model
+   */
+  interface RefreshTokenFieldRefs {
+    readonly id: FieldRef<"RefreshToken", 'Int'>
+    readonly token: FieldRef<"RefreshToken", 'String'>
+    readonly userId: FieldRef<"RefreshToken", 'Int'>
+    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
+    readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RefreshToken findUnique
+   */
+  export type RefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findUniqueOrThrow
+   */
+  export type RefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findFirst
+   */
+  export type RefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findFirstOrThrow
+   */
+  export type RefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findMany
+   */
+  export type RefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshTokens to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken create
+   */
+  export type RefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RefreshToken.
+     */
+    data: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+  }
+
+  /**
+   * RefreshToken createMany
+   */
+  export type RefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefreshToken createManyAndReturn
+   */
+  export type RefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken update
+   */
+  export type RefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RefreshToken.
+     */
+    data: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    /**
+     * Choose, which RefreshToken to update.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken updateMany
+   */
+  export type RefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken updateManyAndReturn
+   */
+  export type RefreshTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken upsert
+   */
+  export type RefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RefreshToken to update in case it exists.
+     */
+    where: RefreshTokenWhereUniqueInput
+    /**
+     * In case the RefreshToken found by the `where` argument doesn't exist, create a new RefreshToken with this data.
+     */
+    create: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    /**
+     * In case the RefreshToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * RefreshToken delete
+   */
+  export type RefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter which RefreshToken to delete.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken deleteMany
+   */
+  export type RefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshTokens to delete
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken without action
+   */
+  export type RefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5769,20 +9638,35 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     role: 'role',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    name: 'name',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const CategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
   export const CourseScalarFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
-    category: 'category',
     instructorId: 'instructorId',
     isPublished: 'isPublished',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    categoryId: 'categoryId',
+    updatedAt: 'updatedAt',
+    image: 'image'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -5794,7 +9678,8 @@ export namespace Prisma {
     youtubeLink: 'youtubeLink',
     explanation: 'explanation',
     courseId: 'courseId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -5805,10 +9690,34 @@ export namespace Prisma {
     userId: 'userId',
     courseId: 'courseId',
     completedSessions: 'completedSessions',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type EnrollmentScalarFieldEnum = (typeof EnrollmentScalarFieldEnum)[keyof typeof EnrollmentScalarFieldEnum]
+
+
+  export const ProgressScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    sessionId: 'sessionId',
+    isCompleted: 'isCompleted',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProgressScalarFieldEnum = (typeof ProgressScalarFieldEnum)[keyof typeof ProgressScalarFieldEnum]
+
+
+  export const RefreshTokenScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    userId: 'userId',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+  };
+
+  export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5825,6 +9734,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -5907,8 +9824,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    name?: StringFilter<"User"> | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     courses?: CourseListRelationFilter
     enrollments?: EnrollmentListRelationFilter
+    progress?: ProgressListRelationFilter
+    refreshTokens?: RefreshTokenListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5917,8 +9838,12 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    name?: SortOrder
+    updatedAt?: SortOrder
     courses?: CourseOrderByRelationAggregateInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
+    progress?: ProgressOrderByRelationAggregateInput
+    refreshTokens?: RefreshTokenOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5930,8 +9855,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    name?: StringFilter<"User"> | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     courses?: CourseListRelationFilter
     enrollments?: EnrollmentListRelationFilter
+    progress?: ProgressListRelationFilter
+    refreshTokens?: RefreshTokenListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5940,6 +9869,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    name?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5956,6 +9887,65 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     role?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    name?: StringWithAggregatesFilter<"User"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type CategoryWhereInput = {
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    id?: IntFilter<"Category"> | number
+    name?: StringFilter<"Category"> | string
+    description?: StringNullableFilter<"Category"> | string | null
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    courses?: CourseListRelationFilter
+  }
+
+  export type CategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    courses?: CourseOrderByRelationAggregateInput
+  }
+
+  export type CategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    description?: StringNullableFilter<"Category"> | string | null
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    courses?: CourseListRelationFilter
+  }, "id" | "name">
+
+  export type CategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CategoryCountOrderByAggregateInput
+    _avg?: CategoryAvgOrderByAggregateInput
+    _max?: CategoryMaxOrderByAggregateInput
+    _min?: CategoryMinOrderByAggregateInput
+    _sum?: CategorySumOrderByAggregateInput
+  }
+
+  export type CategoryScalarWhereWithAggregatesInput = {
+    AND?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    OR?: CategoryScalarWhereWithAggregatesInput[]
+    NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Category"> | number
+    name?: StringWithAggregatesFilter<"Category"> | string
+    description?: StringNullableWithAggregatesFilter<"Category"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
   export type CourseWhereInput = {
@@ -5964,27 +9954,33 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     id?: IntFilter<"Course"> | number
     title?: StringFilter<"Course"> | string
-    description?: StringFilter<"Course"> | string
-    category?: StringFilter<"Course"> | string
+    description?: StringNullableFilter<"Course"> | string | null
     instructorId?: IntFilter<"Course"> | number
     isPublished?: BoolFilter<"Course"> | boolean
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    categoryId?: IntNullableFilter<"Course"> | number | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    image?: StringNullableFilter<"Course"> | string | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     instructor?: XOR<UserScalarRelationFilter, UserWhereInput>
-    sessions?: SessionListRelationFilter
     enrollments?: EnrollmentListRelationFilter
+    sessions?: SessionListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
-    category?: SortOrder
+    description?: SortOrderInput | SortOrder
     instructorId?: SortOrder
     isPublished?: SortOrder
     createdAt?: SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    image?: SortOrderInput | SortOrder
+    category?: CategoryOrderByWithRelationInput
     instructor?: UserOrderByWithRelationInput
-    sessions?: SessionOrderByRelationAggregateInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -5993,24 +9989,29 @@ export namespace Prisma {
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
     title?: StringFilter<"Course"> | string
-    description?: StringFilter<"Course"> | string
-    category?: StringFilter<"Course"> | string
+    description?: StringNullableFilter<"Course"> | string | null
     instructorId?: IntFilter<"Course"> | number
     isPublished?: BoolFilter<"Course"> | boolean
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    categoryId?: IntNullableFilter<"Course"> | number | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    image?: StringNullableFilter<"Course"> | string | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     instructor?: XOR<UserScalarRelationFilter, UserWhereInput>
-    sessions?: SessionListRelationFilter
     enrollments?: EnrollmentListRelationFilter
+    sessions?: SessionListRelationFilter
   }, "id">
 
   export type CourseOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
-    category?: SortOrder
+    description?: SortOrderInput | SortOrder
     instructorId?: SortOrder
     isPublished?: SortOrder
     createdAt?: SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    image?: SortOrderInput | SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -6024,11 +10025,13 @@ export namespace Prisma {
     NOT?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Course"> | number
     title?: StringWithAggregatesFilter<"Course"> | string
-    description?: StringWithAggregatesFilter<"Course"> | string
-    category?: StringWithAggregatesFilter<"Course"> | string
+    description?: StringNullableWithAggregatesFilter<"Course"> | string | null
     instructorId?: IntWithAggregatesFilter<"Course"> | number
     isPublished?: BoolWithAggregatesFilter<"Course"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    categoryId?: IntNullableWithAggregatesFilter<"Course"> | number | null
+    updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    image?: StringNullableWithAggregatesFilter<"Course"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -6041,6 +10044,8 @@ export namespace Prisma {
     explanation?: StringFilter<"Session"> | string
     courseId?: IntFilter<"Session"> | number
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+    progress?: ProgressListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }
 
@@ -6051,6 +10056,8 @@ export namespace Prisma {
     explanation?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+    progress?: ProgressOrderByRelationAggregateInput
     course?: CourseOrderByWithRelationInput
   }
 
@@ -6064,6 +10071,8 @@ export namespace Prisma {
     explanation?: StringFilter<"Session"> | string
     courseId?: IntFilter<"Session"> | number
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+    progress?: ProgressListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }, "id">
 
@@ -6074,6 +10083,7 @@ export namespace Prisma {
     explanation?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: SessionCountOrderByAggregateInput
     _avg?: SessionAvgOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
@@ -6091,6 +10101,7 @@ export namespace Prisma {
     explanation?: StringWithAggregatesFilter<"Session"> | string
     courseId?: IntWithAggregatesFilter<"Session"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
   }
 
   export type EnrollmentWhereInput = {
@@ -6102,8 +10113,9 @@ export namespace Prisma {
     courseId?: IntFilter<"Enrollment"> | number
     completedSessions?: IntNullableListFilter<"Enrollment">
     createdAt?: DateTimeFilter<"Enrollment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type EnrollmentOrderByWithRelationInput = {
@@ -6112,8 +10124,9 @@ export namespace Prisma {
     courseId?: SortOrder
     completedSessions?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    updatedAt?: SortOrder
     course?: CourseOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type EnrollmentWhereUniqueInput = Prisma.AtLeast<{
@@ -6125,8 +10138,9 @@ export namespace Prisma {
     courseId?: IntFilter<"Enrollment"> | number
     completedSessions?: IntNullableListFilter<"Enrollment">
     createdAt?: DateTimeFilter<"Enrollment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type EnrollmentOrderByWithAggregationInput = {
@@ -6135,6 +10149,7 @@ export namespace Prisma {
     courseId?: SortOrder
     completedSessions?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: EnrollmentCountOrderByAggregateInput
     _avg?: EnrollmentAvgOrderByAggregateInput
     _max?: EnrollmentMaxOrderByAggregateInput
@@ -6151,6 +10166,129 @@ export namespace Prisma {
     courseId?: IntWithAggregatesFilter<"Enrollment"> | number
     completedSessions?: IntNullableListFilter<"Enrollment">
     createdAt?: DateTimeWithAggregatesFilter<"Enrollment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Enrollment"> | Date | string
+  }
+
+  export type ProgressWhereInput = {
+    AND?: ProgressWhereInput | ProgressWhereInput[]
+    OR?: ProgressWhereInput[]
+    NOT?: ProgressWhereInput | ProgressWhereInput[]
+    id?: IntFilter<"Progress"> | number
+    userId?: IntFilter<"Progress"> | number
+    sessionId?: IntFilter<"Progress"> | number
+    isCompleted?: BoolFilter<"Progress"> | boolean
+    createdAt?: DateTimeFilter<"Progress"> | Date | string
+    updatedAt?: DateTimeFilter<"Progress"> | Date | string
+    session?: XOR<SessionScalarRelationFilter, SessionWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ProgressOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+    isCompleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    session?: SessionOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ProgressWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ProgressWhereInput | ProgressWhereInput[]
+    OR?: ProgressWhereInput[]
+    NOT?: ProgressWhereInput | ProgressWhereInput[]
+    userId?: IntFilter<"Progress"> | number
+    sessionId?: IntFilter<"Progress"> | number
+    isCompleted?: BoolFilter<"Progress"> | boolean
+    createdAt?: DateTimeFilter<"Progress"> | Date | string
+    updatedAt?: DateTimeFilter<"Progress"> | Date | string
+    session?: XOR<SessionScalarRelationFilter, SessionWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ProgressOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+    isCompleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProgressCountOrderByAggregateInput
+    _avg?: ProgressAvgOrderByAggregateInput
+    _max?: ProgressMaxOrderByAggregateInput
+    _min?: ProgressMinOrderByAggregateInput
+    _sum?: ProgressSumOrderByAggregateInput
+  }
+
+  export type ProgressScalarWhereWithAggregatesInput = {
+    AND?: ProgressScalarWhereWithAggregatesInput | ProgressScalarWhereWithAggregatesInput[]
+    OR?: ProgressScalarWhereWithAggregatesInput[]
+    NOT?: ProgressScalarWhereWithAggregatesInput | ProgressScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Progress"> | number
+    userId?: IntWithAggregatesFilter<"Progress"> | number
+    sessionId?: IntWithAggregatesFilter<"Progress"> | number
+    isCompleted?: BoolWithAggregatesFilter<"Progress"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Progress"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Progress"> | Date | string
+  }
+
+  export type RefreshTokenWhereInput = {
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    id?: IntFilter<"RefreshToken"> | number
+    token?: StringFilter<"RefreshToken"> | string
+    userId?: IntFilter<"RefreshToken"> | number
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RefreshTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    token?: string
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    userId?: IntFilter<"RefreshToken"> | number
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "token">
+
+  export type RefreshTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: RefreshTokenCountOrderByAggregateInput
+    _avg?: RefreshTokenAvgOrderByAggregateInput
+    _max?: RefreshTokenMaxOrderByAggregateInput
+    _min?: RefreshTokenMinOrderByAggregateInput
+    _sum?: RefreshTokenSumOrderByAggregateInput
+  }
+
+  export type RefreshTokenScalarWhereWithAggregatesInput = {
+    AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    OR?: RefreshTokenScalarWhereWithAggregatesInput[]
+    NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"RefreshToken"> | number
+    token?: StringWithAggregatesFilter<"RefreshToken"> | string
+    userId?: IntWithAggregatesFilter<"RefreshToken"> | number
+    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -6158,8 +10296,12 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     courses?: CourseCreateNestedManyWithoutInstructorInput
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    progress?: ProgressCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6168,8 +10310,12 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     courses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    progress?: ProgressUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6177,8 +10323,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUpdateManyWithoutInstructorNestedInput
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    progress?: ProgressUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6187,8 +10337,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    progress?: ProgressUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6197,6 +10351,8 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6204,6 +10360,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6212,80 +10370,152 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryCreateInput = {
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courses?: CourseCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateInput = {
+    id?: number
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryCreateManyInput = {
+    id?: number
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CourseCreateInput = {
     title: string
-    description: string
-    category: string
+    description?: string | null
     isPublished?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    category?: CategoryCreateNestedOneWithoutCoursesInput
     instructor: UserCreateNestedOneWithoutCoursesInput
-    sessions?: SessionCreateNestedManyWithoutCourseInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    sessions?: SessionCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
     id?: number
     title: string
-    description: string
-    category: string
+    description?: string | null
     instructorId: number
     isPublished?: boolean
     createdAt?: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: CategoryUpdateOneWithoutCoursesNestedInput
     instructor?: UserUpdateOneRequiredWithoutCoursesNestedInput
-    sessions?: SessionUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     instructorId?: IntFieldUpdateOperationsInput | number
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
     id?: number
     title: string
-    description: string
-    category: string
+    description?: string | null
     instructorId: number
     isPublished?: boolean
     createdAt?: Date | string
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
   }
 
   export type CourseUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     instructorId?: IntFieldUpdateOperationsInput | number
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -6293,6 +10523,8 @@ export namespace Prisma {
     youtubeLink: string
     explanation: string
     createdAt?: Date | string
+    updatedAt?: Date | string
+    progress?: ProgressCreateNestedManyWithoutSessionInput
     course: CourseCreateNestedOneWithoutSessionsInput
   }
 
@@ -6303,6 +10535,8 @@ export namespace Prisma {
     explanation: string
     courseId: number
     createdAt?: Date | string
+    updatedAt?: Date | string
+    progress?: ProgressUncheckedCreateNestedManyWithoutSessionInput
   }
 
   export type SessionUpdateInput = {
@@ -6310,6 +10544,8 @@ export namespace Prisma {
     youtubeLink?: StringFieldUpdateOperationsInput | string
     explanation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progress?: ProgressUpdateManyWithoutSessionNestedInput
     course?: CourseUpdateOneRequiredWithoutSessionsNestedInput
   }
 
@@ -6320,6 +10556,8 @@ export namespace Prisma {
     explanation?: StringFieldUpdateOperationsInput | string
     courseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progress?: ProgressUncheckedUpdateManyWithoutSessionNestedInput
   }
 
   export type SessionCreateManyInput = {
@@ -6329,6 +10567,7 @@ export namespace Prisma {
     explanation: string
     courseId: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SessionUpdateManyMutationInput = {
@@ -6336,6 +10575,7 @@ export namespace Prisma {
     youtubeLink?: StringFieldUpdateOperationsInput | string
     explanation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionUncheckedUpdateManyInput = {
@@ -6345,13 +10585,15 @@ export namespace Prisma {
     explanation?: StringFieldUpdateOperationsInput | string
     courseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnrollmentCreateInput = {
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutEnrollmentsInput
+    updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutEnrollmentsInput
+    user: UserCreateNestedOneWithoutEnrollmentsInput
   }
 
   export type EnrollmentUncheckedCreateInput = {
@@ -6360,13 +10602,15 @@ export namespace Prisma {
     courseId: number
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnrollmentUpdateInput = {
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutEnrollmentsNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutEnrollmentsNestedInput
+    user?: UserUpdateOneRequiredWithoutEnrollmentsNestedInput
   }
 
   export type EnrollmentUncheckedUpdateInput = {
@@ -6375,6 +10619,7 @@ export namespace Prisma {
     courseId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnrollmentCreateManyInput = {
@@ -6383,11 +10628,13 @@ export namespace Prisma {
     courseId: number
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnrollmentUpdateManyMutationInput = {
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnrollmentUncheckedUpdateManyInput = {
@@ -6395,6 +10642,117 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     courseId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressCreateInput = {
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    session: SessionCreateNestedOneWithoutProgressInput
+    user: UserCreateNestedOneWithoutProgressInput
+  }
+
+  export type ProgressUncheckedCreateInput = {
+    id?: number
+    userId: number
+    sessionId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgressUpdateInput = {
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    session?: SessionUpdateOneRequiredWithoutProgressNestedInput
+    user?: UserUpdateOneRequiredWithoutProgressNestedInput
+  }
+
+  export type ProgressUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    sessionId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressCreateManyInput = {
+    id?: number
+    userId: number
+    sessionId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgressUpdateManyMutationInput = {
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    sessionId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenCreateInput = {
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRefreshTokensInput
+  }
+
+  export type RefreshTokenUncheckedCreateInput = {
+    id?: number
+    token: string
+    userId: number
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
+  }
+
+  export type RefreshTokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenCreateManyInput = {
+    id?: number
+    token: string
+    userId: number
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6447,11 +10805,31 @@ export namespace Prisma {
     none?: EnrollmentWhereInput
   }
 
+  export type ProgressListRelationFilter = {
+    every?: ProgressWhereInput
+    some?: ProgressWhereInput
+    none?: ProgressWhereInput
+  }
+
+  export type RefreshTokenListRelationFilter = {
+    every?: RefreshTokenWhereInput
+    some?: RefreshTokenWhereInput
+    none?: RefreshTokenWhereInput
+  }
+
   export type CourseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type EnrollmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProgressOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RefreshTokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6461,6 +10839,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    name?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -6473,6 +10853,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    name?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6481,6 +10863,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
+    name?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -6535,9 +10919,95 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type CategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategorySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type CategoryNullableScalarRelationFilter = {
+    is?: CategoryWhereInput | null
+    isNot?: CategoryWhereInput | null
   }
 
   export type UserScalarRelationFilter = {
@@ -6559,40 +11029,48 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrder
     instructorId?: SortOrder
     isPublished?: SortOrder
     createdAt?: SortOrder
+    categoryId?: SortOrder
+    updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
     id?: SortOrder
     instructorId?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrder
     instructorId?: SortOrder
     isPublished?: SortOrder
     createdAt?: SortOrder
+    categoryId?: SortOrder
+    updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrder
     instructorId?: SortOrder
     isPublished?: SortOrder
     createdAt?: SortOrder
+    categoryId?: SortOrder
+    updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
     id?: SortOrder
     instructorId?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -6601,6 +11079,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type CourseScalarRelationFilter = {
@@ -6615,6 +11109,7 @@ export namespace Prisma {
     explanation?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionAvgOrderByAggregateInput = {
@@ -6629,6 +11124,7 @@ export namespace Prisma {
     explanation?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
@@ -6638,6 +11134,7 @@ export namespace Prisma {
     explanation?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionSumOrderByAggregateInput = {
@@ -6659,6 +11156,7 @@ export namespace Prisma {
     courseId?: SortOrder
     completedSessions?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnrollmentAvgOrderByAggregateInput = {
@@ -6673,6 +11171,7 @@ export namespace Prisma {
     userId?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnrollmentMinOrderByAggregateInput = {
@@ -6680,6 +11179,7 @@ export namespace Prisma {
     userId?: SortOrder
     courseId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnrollmentSumOrderByAggregateInput = {
@@ -6687,6 +11187,84 @@ export namespace Prisma {
     userId?: SortOrder
     courseId?: SortOrder
     completedSessions?: SortOrder
+  }
+
+  export type SessionScalarRelationFilter = {
+    is?: SessionWhereInput
+    isNot?: SessionWhereInput
+  }
+
+  export type ProgressCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+    isCompleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgressAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+  }
+
+  export type ProgressMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+    isCompleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgressMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+    isCompleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgressSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sessionId?: SortOrder
+  }
+
+  export type RefreshTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefreshTokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type RefreshTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefreshTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefreshTokenSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
   }
 
   export type CourseCreateNestedManyWithoutInstructorInput = {
@@ -6703,6 +11281,20 @@ export namespace Prisma {
     connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
   }
 
+  export type ProgressCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
+    createMany?: ProgressCreateManyUserInputEnvelope
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+  }
+
+  export type RefreshTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  }
+
   export type CourseUncheckedCreateNestedManyWithoutInstructorInput = {
     create?: XOR<CourseCreateWithoutInstructorInput, CourseUncheckedCreateWithoutInstructorInput> | CourseCreateWithoutInstructorInput[] | CourseUncheckedCreateWithoutInstructorInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutInstructorInput | CourseCreateOrConnectWithoutInstructorInput[]
@@ -6715,6 +11307,20 @@ export namespace Prisma {
     connectOrCreate?: EnrollmentCreateOrConnectWithoutUserInput | EnrollmentCreateOrConnectWithoutUserInput[]
     createMany?: EnrollmentCreateManyUserInputEnvelope
     connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
+  }
+
+  export type ProgressUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
+    createMany?: ProgressCreateManyUserInputEnvelope
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+  }
+
+  export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6753,6 +11359,34 @@ export namespace Prisma {
     deleteMany?: EnrollmentScalarWhereInput | EnrollmentScalarWhereInput[]
   }
 
+  export type ProgressUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
+    upsert?: ProgressUpsertWithWhereUniqueWithoutUserInput | ProgressUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProgressCreateManyUserInputEnvelope
+    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    update?: ProgressUpdateWithWhereUniqueWithoutUserInput | ProgressUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProgressUpdateManyWithWhereWithoutUserInput | ProgressUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+  }
+
+  export type RefreshTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6789,17 +11423,90 @@ export namespace Prisma {
     deleteMany?: EnrollmentScalarWhereInput | EnrollmentScalarWhereInput[]
   }
 
+  export type ProgressUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
+    upsert?: ProgressUpsertWithWhereUniqueWithoutUserInput | ProgressUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProgressCreateManyUserInputEnvelope
+    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    update?: ProgressUpdateWithWhereUniqueWithoutUserInput | ProgressUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProgressUpdateManyWithWhereWithoutUserInput | ProgressUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+  }
+
+  export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
+  export type CourseCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
+    createMany?: CourseCreateManyCategoryInputEnvelope
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type CourseUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
+    createMany?: CourseCreateManyCategoryInputEnvelope
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type CourseUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutCategoryInput | CourseUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: CourseCreateManyCategoryInputEnvelope
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutCategoryInput | CourseUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutCategoryInput | CourseUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type CourseUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutCategoryInput | CourseUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: CourseCreateManyCategoryInputEnvelope
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutCategoryInput | CourseUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutCategoryInput | CourseUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type CategoryCreateNestedOneWithoutCoursesInput = {
+    create?: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutCoursesInput
+    connect?: CategoryWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutCoursesInput = {
     create?: XOR<UserCreateWithoutCoursesInput, UserUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: UserCreateOrConnectWithoutCoursesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type SessionCreateNestedManyWithoutCourseInput = {
-    create?: XOR<SessionCreateWithoutCourseInput, SessionUncheckedCreateWithoutCourseInput> | SessionCreateWithoutCourseInput[] | SessionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutCourseInput | SessionCreateOrConnectWithoutCourseInput[]
-    createMany?: SessionCreateManyCourseInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type EnrollmentCreateNestedManyWithoutCourseInput = {
@@ -6809,7 +11516,7 @@ export namespace Prisma {
     connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutCourseInput = {
+  export type SessionCreateNestedManyWithoutCourseInput = {
     create?: XOR<SessionCreateWithoutCourseInput, SessionUncheckedCreateWithoutCourseInput> | SessionCreateWithoutCourseInput[] | SessionUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutCourseInput | SessionCreateOrConnectWithoutCourseInput[]
     createMany?: SessionCreateManyCourseInputEnvelope
@@ -6823,8 +11530,25 @@ export namespace Prisma {
     connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
   }
 
+  export type SessionUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<SessionCreateWithoutCourseInput, SessionUncheckedCreateWithoutCourseInput> | SessionCreateWithoutCourseInput[] | SessionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutCourseInput | SessionCreateOrConnectWithoutCourseInput[]
+    createMany?: SessionCreateManyCourseInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type CategoryUpdateOneWithoutCoursesNestedInput = {
+    create?: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutCoursesInput
+    upsert?: CategoryUpsertWithoutCoursesInput
+    disconnect?: CategoryWhereInput | boolean
+    delete?: CategoryWhereInput | boolean
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutCoursesInput, CategoryUpdateWithoutCoursesInput>, CategoryUncheckedUpdateWithoutCoursesInput>
   }
 
   export type UserUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -6833,6 +11557,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCoursesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCoursesInput, UserUpdateWithoutCoursesInput>, UserUncheckedUpdateWithoutCoursesInput>
+  }
+
+  export type EnrollmentUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput> | EnrollmentCreateWithoutCourseInput[] | EnrollmentUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: EnrollmentCreateOrConnectWithoutCourseInput | EnrollmentCreateOrConnectWithoutCourseInput[]
+    upsert?: EnrollmentUpsertWithWhereUniqueWithoutCourseInput | EnrollmentUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: EnrollmentCreateManyCourseInputEnvelope
+    set?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
+    disconnect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
+    delete?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
+    connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
+    update?: EnrollmentUpdateWithWhereUniqueWithoutCourseInput | EnrollmentUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: EnrollmentUpdateManyWithWhereWithoutCourseInput | EnrollmentUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: EnrollmentScalarWhereInput | EnrollmentScalarWhereInput[]
   }
 
   export type SessionUpdateManyWithoutCourseNestedInput = {
@@ -6849,7 +11587,15 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type EnrollmentUpdateManyWithoutCourseNestedInput = {
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnrollmentUncheckedUpdateManyWithoutCourseNestedInput = {
     create?: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput> | EnrollmentCreateWithoutCourseInput[] | EnrollmentUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: EnrollmentCreateOrConnectWithoutCourseInput | EnrollmentCreateOrConnectWithoutCourseInput[]
     upsert?: EnrollmentUpsertWithWhereUniqueWithoutCourseInput | EnrollmentUpsertWithWhereUniqueWithoutCourseInput[]
@@ -6877,24 +11623,38 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type EnrollmentUncheckedUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput> | EnrollmentCreateWithoutCourseInput[] | EnrollmentUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: EnrollmentCreateOrConnectWithoutCourseInput | EnrollmentCreateOrConnectWithoutCourseInput[]
-    upsert?: EnrollmentUpsertWithWhereUniqueWithoutCourseInput | EnrollmentUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: EnrollmentCreateManyCourseInputEnvelope
-    set?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
-    disconnect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
-    delete?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
-    connect?: EnrollmentWhereUniqueInput | EnrollmentWhereUniqueInput[]
-    update?: EnrollmentUpdateWithWhereUniqueWithoutCourseInput | EnrollmentUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: EnrollmentUpdateManyWithWhereWithoutCourseInput | EnrollmentUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: EnrollmentScalarWhereInput | EnrollmentScalarWhereInput[]
+  export type ProgressCreateNestedManyWithoutSessionInput = {
+    create?: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput> | ProgressCreateWithoutSessionInput[] | ProgressUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutSessionInput | ProgressCreateOrConnectWithoutSessionInput[]
+    createMany?: ProgressCreateManySessionInputEnvelope
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
   }
 
   export type CourseCreateNestedOneWithoutSessionsInput = {
     create?: XOR<CourseCreateWithoutSessionsInput, CourseUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: CourseCreateOrConnectWithoutSessionsInput
     connect?: CourseWhereUniqueInput
+  }
+
+  export type ProgressUncheckedCreateNestedManyWithoutSessionInput = {
+    create?: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput> | ProgressCreateWithoutSessionInput[] | ProgressUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutSessionInput | ProgressCreateOrConnectWithoutSessionInput[]
+    createMany?: ProgressCreateManySessionInputEnvelope
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+  }
+
+  export type ProgressUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput> | ProgressCreateWithoutSessionInput[] | ProgressUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutSessionInput | ProgressCreateOrConnectWithoutSessionInput[]
+    upsert?: ProgressUpsertWithWhereUniqueWithoutSessionInput | ProgressUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: ProgressCreateManySessionInputEnvelope
+    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    update?: ProgressUpdateWithWhereUniqueWithoutSessionInput | ProgressUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: ProgressUpdateManyWithWhereWithoutSessionInput | ProgressUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
   }
 
   export type CourseUpdateOneRequiredWithoutSessionsNestedInput = {
@@ -6905,14 +11665,22 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSessionsInput, CourseUpdateWithoutSessionsInput>, CourseUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type EnrollmentCreatecompletedSessionsInput = {
-    set: number[]
+  export type ProgressUncheckedUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput> | ProgressCreateWithoutSessionInput[] | ProgressUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: ProgressCreateOrConnectWithoutSessionInput | ProgressCreateOrConnectWithoutSessionInput[]
+    upsert?: ProgressUpsertWithWhereUniqueWithoutSessionInput | ProgressUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: ProgressCreateManySessionInputEnvelope
+    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+    update?: ProgressUpdateWithWhereUniqueWithoutSessionInput | ProgressUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: ProgressUpdateManyWithWhereWithoutSessionInput | ProgressUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutEnrollmentsInput = {
-    create?: XOR<UserCreateWithoutEnrollmentsInput, UserUncheckedCreateWithoutEnrollmentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEnrollmentsInput
-    connect?: UserWhereUniqueInput
+  export type EnrollmentCreatecompletedSessionsInput = {
+    set: number[]
   }
 
   export type CourseCreateNestedOneWithoutEnrollmentsInput = {
@@ -6921,9 +11689,23 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutEnrollmentsInput = {
+    create?: XOR<UserCreateWithoutEnrollmentsInput, UserUncheckedCreateWithoutEnrollmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEnrollmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnrollmentUpdatecompletedSessionsInput = {
     set?: number[]
     push?: number | number[]
+  }
+
+  export type CourseUpdateOneRequiredWithoutEnrollmentsNestedInput = {
+    create?: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutEnrollmentsInput
+    upsert?: CourseUpsertWithoutEnrollmentsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutEnrollmentsInput, CourseUpdateWithoutEnrollmentsInput>, CourseUncheckedUpdateWithoutEnrollmentsInput>
   }
 
   export type UserUpdateOneRequiredWithoutEnrollmentsNestedInput = {
@@ -6934,12 +11716,46 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEnrollmentsInput, UserUpdateWithoutEnrollmentsInput>, UserUncheckedUpdateWithoutEnrollmentsInput>
   }
 
-  export type CourseUpdateOneRequiredWithoutEnrollmentsNestedInput = {
-    create?: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutEnrollmentsInput
-    upsert?: CourseUpsertWithoutEnrollmentsInput
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutEnrollmentsInput, CourseUpdateWithoutEnrollmentsInput>, CourseUncheckedUpdateWithoutEnrollmentsInput>
+  export type SessionCreateNestedOneWithoutProgressInput = {
+    create?: XOR<SessionCreateWithoutProgressInput, SessionUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutProgressInput
+    connect?: SessionWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutProgressInput = {
+    create?: XOR<UserCreateWithoutProgressInput, UserUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProgressInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SessionUpdateOneRequiredWithoutProgressNestedInput = {
+    create?: XOR<SessionCreateWithoutProgressInput, SessionUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutProgressInput
+    upsert?: SessionUpsertWithoutProgressInput
+    connect?: SessionWhereUniqueInput
+    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutProgressInput, SessionUpdateWithoutProgressInput>, SessionUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutProgressNestedInput = {
+    create?: XOR<UserCreateWithoutProgressInput, UserUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProgressInput
+    upsert?: UserUpsertWithoutProgressInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProgressInput, UserUpdateWithoutProgressInput>, UserUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type UserCreateNestedOneWithoutRefreshTokensInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    upsert?: UserUpsertWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7036,6 +11852,48 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -7049,25 +11907,56 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type CourseCreateWithoutInstructorInput = {
     title: string
-    description: string
-    category: string
+    description?: string | null
     isPublished?: boolean
     createdAt?: Date | string
-    sessions?: SessionCreateNestedManyWithoutCourseInput
+    updatedAt?: Date | string
+    image?: string | null
+    category?: CategoryCreateNestedOneWithoutCoursesInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    sessions?: SessionCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutInstructorInput = {
     id?: number
     title: string
-    description: string
-    category: string
+    description?: string | null
     isPublished?: boolean
     createdAt?: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutInstructorInput = {
@@ -7083,6 +11972,7 @@ export namespace Prisma {
   export type EnrollmentCreateWithoutUserInput = {
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
+    updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutEnrollmentsInput
   }
 
@@ -7091,6 +11981,7 @@ export namespace Prisma {
     courseId: number
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnrollmentCreateOrConnectWithoutUserInput = {
@@ -7100,6 +11991,54 @@ export namespace Prisma {
 
   export type EnrollmentCreateManyUserInputEnvelope = {
     data: EnrollmentCreateManyUserInput | EnrollmentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProgressCreateWithoutUserInput = {
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    session: SessionCreateNestedOneWithoutProgressInput
+  }
+
+  export type ProgressUncheckedCreateWithoutUserInput = {
+    id?: number
+    sessionId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgressCreateOrConnectWithoutUserInput = {
+    where: ProgressWhereUniqueInput
+    create: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProgressCreateManyUserInputEnvelope = {
+    data: ProgressCreateManyUserInput | ProgressCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RefreshTokenCreateWithoutUserInput = {
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUncheckedCreateWithoutUserInput = {
+    id?: number
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenCreateOrConnectWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenCreateManyUserInputEnvelope = {
+    data: RefreshTokenCreateManyUserInput | RefreshTokenCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -7125,11 +12064,13 @@ export namespace Prisma {
     NOT?: CourseScalarWhereInput | CourseScalarWhereInput[]
     id?: IntFilter<"Course"> | number
     title?: StringFilter<"Course"> | string
-    description?: StringFilter<"Course"> | string
-    category?: StringFilter<"Course"> | string
+    description?: StringNullableFilter<"Course"> | string | null
     instructorId?: IntFilter<"Course"> | number
     isPublished?: BoolFilter<"Course"> | boolean
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    categoryId?: IntNullableFilter<"Course"> | number | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    image?: StringNullableFilter<"Course"> | string | null
   }
 
   export type EnrollmentUpsertWithWhereUniqueWithoutUserInput = {
@@ -7157,6 +12098,133 @@ export namespace Prisma {
     courseId?: IntFilter<"Enrollment"> | number
     completedSessions?: IntNullableListFilter<"Enrollment">
     createdAt?: DateTimeFilter<"Enrollment"> | Date | string
+    updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
+  }
+
+  export type ProgressUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProgressWhereUniqueInput
+    update: XOR<ProgressUpdateWithoutUserInput, ProgressUncheckedUpdateWithoutUserInput>
+    create: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProgressUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProgressWhereUniqueInput
+    data: XOR<ProgressUpdateWithoutUserInput, ProgressUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProgressUpdateManyWithWhereWithoutUserInput = {
+    where: ProgressScalarWhereInput
+    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProgressScalarWhereInput = {
+    AND?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+    OR?: ProgressScalarWhereInput[]
+    NOT?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+    id?: IntFilter<"Progress"> | number
+    userId?: IntFilter<"Progress"> | number
+    sessionId?: IntFilter<"Progress"> | number
+    isCompleted?: BoolFilter<"Progress"> | boolean
+    createdAt?: DateTimeFilter<"Progress"> | Date | string
+    updatedAt?: DateTimeFilter<"Progress"> | Date | string
+  }
+
+  export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    data: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateManyWithWhereWithoutUserInput = {
+    where: RefreshTokenScalarWhereInput
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RefreshTokenScalarWhereInput = {
+    AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    OR?: RefreshTokenScalarWhereInput[]
+    NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    id?: IntFilter<"RefreshToken"> | number
+    token?: StringFilter<"RefreshToken"> | string
+    userId?: IntFilter<"RefreshToken"> | number
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+  }
+
+  export type CourseCreateWithoutCategoryInput = {
+    title: string
+    description?: string | null
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    instructor: UserCreateNestedOneWithoutCoursesInput
+    enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    sessions?: SessionCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutCategoryInput = {
+    id?: number
+    title: string
+    description?: string | null
+    instructorId: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type CourseCreateManyCategoryInputEnvelope = {
+    data: CourseCreateManyCategoryInput | CourseCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CourseUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    update: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
+    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type CourseUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    data: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type CourseUpdateManyWithWhereWithoutCategoryInput = {
+    where: CourseScalarWhereInput
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type CategoryCreateWithoutCoursesInput = {
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryUncheckedCreateWithoutCoursesInput = {
+    id?: number
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryCreateOrConnectWithoutCoursesInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
   }
 
   export type UserCreateWithoutCoursesInput = {
@@ -7164,7 +12232,11 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    progress?: ProgressCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCoursesInput = {
@@ -7173,7 +12245,11 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    progress?: ProgressUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCoursesInput = {
@@ -7181,11 +12257,38 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutCoursesInput, UserUncheckedCreateWithoutCoursesInput>
   }
 
+  export type EnrollmentCreateWithoutCourseInput = {
+    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutEnrollmentsInput
+  }
+
+  export type EnrollmentUncheckedCreateWithoutCourseInput = {
+    id?: number
+    userId: number
+    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EnrollmentCreateOrConnectWithoutCourseInput = {
+    where: EnrollmentWhereUniqueInput
+    create: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput>
+  }
+
+  export type EnrollmentCreateManyCourseInputEnvelope = {
+    data: EnrollmentCreateManyCourseInput | EnrollmentCreateManyCourseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionCreateWithoutCourseInput = {
     title: string
     youtubeLink: string
     explanation: string
     createdAt?: Date | string
+    updatedAt?: Date | string
+    progress?: ProgressCreateNestedManyWithoutSessionInput
   }
 
   export type SessionUncheckedCreateWithoutCourseInput = {
@@ -7194,6 +12297,8 @@ export namespace Prisma {
     youtubeLink: string
     explanation: string
     createdAt?: Date | string
+    updatedAt?: Date | string
+    progress?: ProgressUncheckedCreateNestedManyWithoutSessionInput
   }
 
   export type SessionCreateOrConnectWithoutCourseInput = {
@@ -7206,27 +12311,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EnrollmentCreateWithoutCourseInput = {
-    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutEnrollmentsInput
+  export type CategoryUpsertWithoutCoursesInput = {
+    update: XOR<CategoryUpdateWithoutCoursesInput, CategoryUncheckedUpdateWithoutCoursesInput>
+    create: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
+    where?: CategoryWhereInput
   }
 
-  export type EnrollmentUncheckedCreateWithoutCourseInput = {
-    id?: number
-    userId: number
-    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
-    createdAt?: Date | string
+  export type CategoryUpdateToOneWithWhereWithoutCoursesInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutCoursesInput, CategoryUncheckedUpdateWithoutCoursesInput>
   }
 
-  export type EnrollmentCreateOrConnectWithoutCourseInput = {
-    where: EnrollmentWhereUniqueInput
-    create: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput>
+  export type CategoryUpdateWithoutCoursesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EnrollmentCreateManyCourseInputEnvelope = {
-    data: EnrollmentCreateManyCourseInput | EnrollmentCreateManyCourseInput[]
-    skipDuplicates?: boolean
+  export type CategoryUncheckedUpdateWithoutCoursesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUpsertWithoutCoursesInput = {
@@ -7245,7 +12353,11 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    progress?: ProgressUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCoursesInput = {
@@ -7254,7 +12366,27 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    progress?: ProgressUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EnrollmentUpsertWithWhereUniqueWithoutCourseInput = {
+    where: EnrollmentWhereUniqueInput
+    update: XOR<EnrollmentUpdateWithoutCourseInput, EnrollmentUncheckedUpdateWithoutCourseInput>
+    create: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput>
+  }
+
+  export type EnrollmentUpdateWithWhereUniqueWithoutCourseInput = {
+    where: EnrollmentWhereUniqueInput
+    data: XOR<EnrollmentUpdateWithoutCourseInput, EnrollmentUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type EnrollmentUpdateManyWithWhereWithoutCourseInput = {
+    where: EnrollmentScalarWhereInput
+    data: XOR<EnrollmentUpdateManyMutationInput, EnrollmentUncheckedUpdateManyWithoutCourseInput>
   }
 
   export type SessionUpsertWithWhereUniqueWithoutCourseInput = {
@@ -7283,30 +12415,42 @@ export namespace Prisma {
     explanation?: StringFilter<"Session"> | string
     courseId?: IntFilter<"Session"> | number
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
   }
 
-  export type EnrollmentUpsertWithWhereUniqueWithoutCourseInput = {
-    where: EnrollmentWhereUniqueInput
-    update: XOR<EnrollmentUpdateWithoutCourseInput, EnrollmentUncheckedUpdateWithoutCourseInput>
-    create: XOR<EnrollmentCreateWithoutCourseInput, EnrollmentUncheckedCreateWithoutCourseInput>
+  export type ProgressCreateWithoutSessionInput = {
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProgressInput
   }
 
-  export type EnrollmentUpdateWithWhereUniqueWithoutCourseInput = {
-    where: EnrollmentWhereUniqueInput
-    data: XOR<EnrollmentUpdateWithoutCourseInput, EnrollmentUncheckedUpdateWithoutCourseInput>
+  export type ProgressUncheckedCreateWithoutSessionInput = {
+    id?: number
+    userId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type EnrollmentUpdateManyWithWhereWithoutCourseInput = {
-    where: EnrollmentScalarWhereInput
-    data: XOR<EnrollmentUpdateManyMutationInput, EnrollmentUncheckedUpdateManyWithoutCourseInput>
+  export type ProgressCreateOrConnectWithoutSessionInput = {
+    where: ProgressWhereUniqueInput
+    create: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput>
+  }
+
+  export type ProgressCreateManySessionInputEnvelope = {
+    data: ProgressCreateManySessionInput | ProgressCreateManySessionInput[]
+    skipDuplicates?: boolean
   }
 
   export type CourseCreateWithoutSessionsInput = {
     title: string
-    description: string
-    category: string
+    description?: string | null
     isPublished?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    category?: CategoryCreateNestedOneWithoutCoursesInput
     instructor: UserCreateNestedOneWithoutCoursesInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
   }
@@ -7314,17 +12458,35 @@ export namespace Prisma {
   export type CourseUncheckedCreateWithoutSessionsInput = {
     id?: number
     title: string
-    description: string
-    category: string
+    description?: string | null
     instructorId: number
     isPublished?: boolean
     createdAt?: Date | string
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutSessionsInput = {
     where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutSessionsInput, CourseUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type ProgressUpsertWithWhereUniqueWithoutSessionInput = {
+    where: ProgressWhereUniqueInput
+    update: XOR<ProgressUpdateWithoutSessionInput, ProgressUncheckedUpdateWithoutSessionInput>
+    create: XOR<ProgressCreateWithoutSessionInput, ProgressUncheckedCreateWithoutSessionInput>
+  }
+
+  export type ProgressUpdateWithWhereUniqueWithoutSessionInput = {
+    where: ProgressWhereUniqueInput
+    data: XOR<ProgressUpdateWithoutSessionInput, ProgressUncheckedUpdateWithoutSessionInput>
+  }
+
+  export type ProgressUpdateManyWithWhereWithoutSessionInput = {
+    where: ProgressScalarWhereInput
+    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyWithoutSessionInput>
   }
 
   export type CourseUpsertWithoutSessionsInput = {
@@ -7340,10 +12502,12 @@ export namespace Prisma {
 
   export type CourseUpdateWithoutSessionsInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: CategoryUpdateOneWithoutCoursesNestedInput
     instructor?: UserUpdateOneRequiredWithoutCoursesNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
   }
@@ -7351,12 +12515,44 @@ export namespace Prisma {
   export type CourseUncheckedUpdateWithoutSessionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     instructorId?: IntFieldUpdateOperationsInput | number
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseCreateWithoutEnrollmentsInput = {
+    title: string
+    description?: string | null
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    category?: CategoryCreateNestedOneWithoutCoursesInput
+    instructor: UserCreateNestedOneWithoutCoursesInput
+    sessions?: SessionCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutEnrollmentsInput = {
+    id?: number
+    title: string
+    description?: string | null
+    instructorId: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
+    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutEnrollmentsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
   }
 
   export type UserCreateWithoutEnrollmentsInput = {
@@ -7364,7 +12560,11 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     courses?: CourseCreateNestedManyWithoutInstructorInput
+    progress?: ProgressCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -7373,7 +12573,11 @@ export namespace Prisma {
     password: string
     role: string
     createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
     courses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
+    progress?: ProgressUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -7381,30 +12585,40 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutEnrollmentsInput, UserUncheckedCreateWithoutEnrollmentsInput>
   }
 
-  export type CourseCreateWithoutEnrollmentsInput = {
-    title: string
-    description: string
-    category: string
-    isPublished?: boolean
-    createdAt?: Date | string
-    instructor: UserCreateNestedOneWithoutCoursesInput
-    sessions?: SessionCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutEnrollmentsInput = {
-    id?: number
-    title: string
-    description: string
-    category: string
-    instructorId: number
-    isPublished?: boolean
-    createdAt?: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutEnrollmentsInput = {
-    where: CourseWhereUniqueInput
+  export type CourseUpsertWithoutEnrollmentsInput = {
+    update: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
     create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutEnrollmentsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
+  }
+
+  export type CourseUpdateWithoutEnrollmentsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: CategoryUpdateOneWithoutCoursesNestedInput
+    instructor?: UserUpdateOneRequiredWithoutCoursesNestedInput
+    sessions?: SessionUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    instructorId?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type UserUpsertWithoutEnrollmentsInput = {
@@ -7423,7 +12637,11 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUpdateManyWithoutInstructorNestedInput
+    progress?: ProgressUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -7432,48 +12650,208 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
+    progress?: ProgressUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type CourseUpsertWithoutEnrollmentsInput = {
-    update: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
-    create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
-    where?: CourseWhereInput
+  export type SessionCreateWithoutProgressInput = {
+    title: string
+    youtubeLink: string
+    explanation: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutSessionsInput
   }
 
-  export type CourseUpdateToOneWithWhereWithoutEnrollmentsInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
+  export type SessionUncheckedCreateWithoutProgressInput = {
+    id?: number
+    title: string
+    youtubeLink: string
+    explanation: string
+    courseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CourseUpdateWithoutEnrollmentsInput = {
+  export type SessionCreateOrConnectWithoutProgressInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutProgressInput, SessionUncheckedCreateWithoutProgressInput>
+  }
+
+  export type UserCreateWithoutProgressInput = {
+    email: string
+    password: string
+    role: string
+    createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
+    courses?: CourseCreateNestedManyWithoutInstructorInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProgressInput = {
+    id?: number
+    email: string
+    password: string
+    role: string
+    createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
+    courses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProgressInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProgressInput, UserUncheckedCreateWithoutProgressInput>
+  }
+
+  export type SessionUpsertWithoutProgressInput = {
+    update: XOR<SessionUpdateWithoutProgressInput, SessionUncheckedUpdateWithoutProgressInput>
+    create: XOR<SessionCreateWithoutProgressInput, SessionUncheckedCreateWithoutProgressInput>
+    where?: SessionWhereInput
+  }
+
+  export type SessionUpdateToOneWithWhereWithoutProgressInput = {
+    where?: SessionWhereInput
+    data: XOR<SessionUpdateWithoutProgressInput, SessionUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type SessionUpdateWithoutProgressInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    youtubeLink?: StringFieldUpdateOperationsInput | string
+    explanation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    instructor?: UserUpdateOneRequiredWithoutCoursesNestedInput
-    sessions?: SessionUpdateManyWithoutCourseNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutSessionsNestedInput
   }
 
-  export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
+  export type SessionUncheckedUpdateWithoutProgressInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
-    instructorId?: IntFieldUpdateOperationsInput | number
-    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    youtubeLink?: StringFieldUpdateOperationsInput | string
+    explanation?: StringFieldUpdateOperationsInput | string
+    courseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutProgressInput = {
+    update: XOR<UserUpdateWithoutProgressInput, UserUncheckedUpdateWithoutProgressInput>
+    create: XOR<UserCreateWithoutProgressInput, UserUncheckedCreateWithoutProgressInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProgressInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProgressInput, UserUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type UserUpdateWithoutProgressInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUpdateManyWithoutInstructorNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProgressInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRefreshTokensInput = {
+    email: string
+    password: string
+    role: string
+    createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
+    courses?: CourseCreateNestedManyWithoutInstructorInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    progress?: ProgressCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRefreshTokensInput = {
+    id?: number
+    email: string
+    password: string
+    role: string
+    createdAt?: Date | string
+    name: string
+    updatedAt?: Date | string
+    courses?: CourseUncheckedCreateNestedManyWithoutInstructorInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    progress?: ProgressUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRefreshTokensInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpsertWithoutRefreshTokensInput = {
+    update: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpdateWithoutRefreshTokensInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUpdateManyWithoutInstructorNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    progress?: ProgressUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUncheckedUpdateManyWithoutInstructorNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    progress?: ProgressUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseCreateManyInstructorInput = {
     id?: number
     title: string
-    description: string
-    category: string
+    description?: string | null
     isPublished?: boolean
     createdAt?: Date | string
+    categoryId?: number | null
+    updatedAt?: Date | string
+    image?: string | null
   }
 
   export type EnrollmentCreateManyUserInput = {
@@ -7481,41 +12859,64 @@ export namespace Prisma {
     courseId: number
     completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
     createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgressCreateManyUserInput = {
+    id?: number
+    sessionId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefreshTokenCreateManyUserInput = {
+    id?: number
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
   }
 
   export type CourseUpdateWithoutInstructorInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutCourseNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: CategoryUpdateOneWithoutCoursesNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutInstructorInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutInstructorInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    category?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EnrollmentUpdateWithoutUserInput = {
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutEnrollmentsNestedInput
   }
 
@@ -7524,6 +12925,7 @@ export namespace Prisma {
     courseId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnrollmentUncheckedUpdateManyWithoutUserInput = {
@@ -7531,6 +12933,105 @@ export namespace Prisma {
     courseId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressUpdateWithoutUserInput = {
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    session?: SessionUpdateOneRequiredWithoutProgressNestedInput
+  }
+
+  export type ProgressUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sessionId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sessionId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourseCreateManyCategoryInput = {
+    id?: number
+    title: string
+    description?: string | null
+    instructorId: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+  }
+
+  export type CourseUpdateWithoutCategoryInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    instructor?: UserUpdateOneRequiredWithoutCoursesNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    instructorId?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateManyWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    instructorId?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EnrollmentCreateManyCourseInput = {
+    id?: number
+    userId: number
+    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SessionCreateManyCourseInput = {
@@ -7539,41 +13040,13 @@ export namespace Prisma {
     youtubeLink: string
     explanation: string
     createdAt?: Date | string
-  }
-
-  export type EnrollmentCreateManyCourseInput = {
-    id?: number
-    userId: number
-    completedSessions?: EnrollmentCreatecompletedSessionsInput | number[]
-    createdAt?: Date | string
-  }
-
-  export type SessionUpdateWithoutCourseInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    youtubeLink?: StringFieldUpdateOperationsInput | string
-    explanation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SessionUncheckedUpdateWithoutCourseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    youtubeLink?: StringFieldUpdateOperationsInput | string
-    explanation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SessionUncheckedUpdateManyWithoutCourseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    youtubeLink?: StringFieldUpdateOperationsInput | string
-    explanation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: Date | string
   }
 
   export type EnrollmentUpdateWithoutCourseInput = {
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutEnrollmentsNestedInput
   }
 
@@ -7582,6 +13055,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnrollmentUncheckedUpdateManyWithoutCourseInput = {
@@ -7589,6 +13063,66 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     completedSessions?: EnrollmentUpdatecompletedSessionsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUpdateWithoutCourseInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    youtubeLink?: StringFieldUpdateOperationsInput | string
+    explanation?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progress?: ProgressUpdateManyWithoutSessionNestedInput
+  }
+
+  export type SessionUncheckedUpdateWithoutCourseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    youtubeLink?: StringFieldUpdateOperationsInput | string
+    explanation?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    progress?: ProgressUncheckedUpdateManyWithoutSessionNestedInput
+  }
+
+  export type SessionUncheckedUpdateManyWithoutCourseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    youtubeLink?: StringFieldUpdateOperationsInput | string
+    explanation?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressCreateManySessionInput = {
+    id?: number
+    userId: number
+    isCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgressUpdateWithoutSessionInput = {
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProgressNestedInput
+  }
+
+  export type ProgressUncheckedUpdateWithoutSessionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgressUncheckedUpdateManyWithoutSessionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -122,17 +122,29 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  name: 'name',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  category: 'category',
   instructorId: 'instructorId',
   isPublished: 'isPublished',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  categoryId: 'categoryId',
+  updatedAt: 'updatedAt',
+  image: 'image'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -141,7 +153,8 @@ exports.Prisma.SessionScalarFieldEnum = {
   youtubeLink: 'youtubeLink',
   explanation: 'explanation',
   courseId: 'courseId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.EnrollmentScalarFieldEnum = {
@@ -149,6 +162,24 @@ exports.Prisma.EnrollmentScalarFieldEnum = {
   userId: 'userId',
   courseId: 'courseId',
   completedSessions: 'completedSessions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionId: 'sessionId',
+  isCompleted: 'isCompleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt'
 };
 
@@ -162,12 +193,20 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Category: 'Category',
   Course: 'Course',
   Session: 'Session',
-  Enrollment: 'Enrollment'
+  Enrollment: 'Enrollment',
+  Progress: 'Progress',
+  RefreshToken: 'RefreshToken'
 };
 
 /**

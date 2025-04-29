@@ -1,15 +1,20 @@
 import jwt from 'jsonwebtoken';
-import env from '../config/env.js';
 import { sendResponse } from '../utils/response.js';
 
-export const authMiddleware = (roles = []) => (req, res, next) => {
+export const authMiddleware = (roles) => async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return sendResponse(res, 401, null, 'No token provided');
+  if (!token) {
+    return sendResponse(res, 401, null, 'No token provided');
+  }
+
   try {
-    const decoded = jwt.verify(token, env.JWT_SECRET);
-    req.user = decoded;
-    if (roles.length && !roles.includes(decoded.role)) {
-      return sendResponse(res, 403, null, 'Forbidden');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // { id, email, role }
+    
+    const userRole = decoded.role?.toLowerCase();
+    const allowedRoles = roles.map(role => role.toLowerCase());
+    if (roles && !roles.includes(decoded.role)) {
+      return sendResponse(res, 403, null, 'Unauthorized role');
     }
     next();
   } catch (error) {
