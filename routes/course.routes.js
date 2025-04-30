@@ -38,7 +38,7 @@
 // export default router;
 
 import express from 'express';
-import { getCourses, createCourse, updateCourse, deleteCourse, getCategories, getCourseById } from '../controllers/courseController.js';
+import { getCourses, createCourse, updateCourse, deleteCourse, getCategories, getCourseById, allcourse,getCourseDetails } from '../controllers/courseController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { validateDto } from '../middleware/validateDto.js';
 import { courseQueryDto, createCourseDto, updateCourseDto, courseIdDto } from '../dtos/course.dto.js';
@@ -50,6 +50,8 @@ const router = express.Router();
 router.get('/categories', getCategories);
 
 // Route to get all courses
+router.get('/allcourse',allcourse);
+router.get('/:id/details',getCourseDetails);
 router.get('/', authMiddleware(['Student', 'Instructor']), validateDto(courseQueryDto), getCourses);
 
 // Route to create a course

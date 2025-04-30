@@ -38,7 +38,7 @@ router.put(
 
 router.get(
     '/course/:courseId/progress',
-    authMiddleware(['Student']),
+    authMiddleware(['Student','Instructor']),
     getCourseProgress
   );
   

@@ -19,14 +19,14 @@ export const updateProgress = async (req, res, next) => {
   }
 };
 export const getCourseProgress = async (req, res, next) => {
-    try {
-      const { courseId } = req.params;
-      const progress = await progressService.getCourseProgress(req.user.id, Number(courseId));
-      sendResponse(res, 200, progress);
-    } catch (err) {
-      next(err);
-    }
-  };
+  try {
+    const { courseId } = req.params;
+    const progress = await progressService.getCourseProgress(req.user, Number(courseId));
+    sendResponse(res, 200, progress);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const getUserProgress = async (req, res, next) => {
   try {

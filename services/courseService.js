@@ -75,6 +75,54 @@
 import prisma from '../config/database.js';
 import { AppError } from '../utils/errorHandler.js';
 
+export const allcourse=async(user)=>{
+  if (!user) {
+    return {
+      enrolledCourses: [], // No enrolled courses for unauthenticated users
+      remainingCourses: await prisma.course.findMany({
+        include: { sessions: true ,
+          category:true
+        },
+      }),
+    };
+  }
+}
+
+export const getCourseDetails = async (id) => {
+  try {
+    const course = await prisma.course.findUnique({
+      where: { id: Number(id) },
+      include: {
+        sessions: {
+          select: {
+            id: true,
+            title: true,
+            youtubeLink: true,
+            explanation: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!course) {
+      throw new AppError('Course not found', 404);
+    }
+
+    return course;
+  } catch (error) {
+    console.error('Error in getCourseDetails:', error);
+    if (error instanceof AppError) throw error;
+    throw new AppError('Internal Server Error', 500);
+  }
+};
 export const getCourses = async ({ instructorId }, user) => {
   try {
     if (user.role === 'Instructor') {

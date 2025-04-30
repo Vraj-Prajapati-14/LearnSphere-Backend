@@ -37,22 +37,3 @@ export const deleteEnrollment = async (req, res, next) => {
     next(error);
   }
 };
-
-export const getProgress = async (req, res, next) => {
-  try {
-    const progress = await enrollmentService.getProgress(req.params.id, req.user);
-    sendResponse(res, 200, progress);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const markSessionComplete = async (req, res, next) => {
-  try {
-    const { sessionId } = req.body;
-    const enrollment = await enrollmentService.markSessionComplete(req.params.id, sessionId, req.user);
-    sendResponse(res, 200, enrollment);
-  } catch (error) {
-    next(error);
-  }
-};

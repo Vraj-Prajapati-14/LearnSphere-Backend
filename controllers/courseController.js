@@ -69,6 +69,22 @@ export const getCategories = async (req, res, next) => {
     next(error);
   }
 };
+export const allcourse = async (req, res, next) => {
+  try {
+    const courses = await courseService.allcourse(req.user); 
+    sendResponse(res, 200, courses);
+  } catch (error) {
+    next(error);
+  }
+};
+export const getCourseDetails = async (req, res, next) => {
+  try {
+    const course = await courseService.getCourseDetails(req.params.id);
+    sendResponse(res, 200, course);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const getCourses = async (req, res, next) => {
   try {
