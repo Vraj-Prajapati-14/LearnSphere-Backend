@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { sendResponse } from '../utils/response.js';
+import env from '../config/env.js';
 
 export const authMiddleware = (roles) => async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -8,11 +9,9 @@ export const authMiddleware = (roles) => async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, email, role }
-    
-    const userRole = decoded.role?.toLowerCase();
-    const allowedRoles = roles.map(role => role.toLowerCase());
+    const decoded = jwt.verify(token, env.JWT_SECRET);
+    req.user = decoded;
+
     if (roles && !roles.includes(decoded.role)) {
       return sendResponse(res, 403, null, 'Unauthorized role');
     }

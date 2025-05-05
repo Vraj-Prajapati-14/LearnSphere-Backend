@@ -183,6 +183,28 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  rating: 'rating',
+  text: 'text',
+  helpfulCount: 'helpfulCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewCommentScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  userId: 'userId',
+  text: 'text',
+  parentId: 'parentId',
+  helpfulCount: 'helpfulCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -206,7 +228,9 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Enrollment: 'Enrollment',
   Progress: 'Progress',
-  RefreshToken: 'RefreshToken'
+  RefreshToken: 'RefreshToken',
+  Review: 'Review',
+  ReviewComment: 'ReviewComment'
 };
 
 /**

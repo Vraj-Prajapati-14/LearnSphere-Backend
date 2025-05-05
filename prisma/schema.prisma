@@ -15,17 +15,19 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  email         String         @unique
-  password      String
-  role          String
-  createdAt     DateTime       @default(now())
-  name          String
-  updatedAt     DateTime       @updatedAt
-  courses       Course[]       @relation("InstructorCourses")
-  enrollments   Enrollment[]
-  progress      Progress[]
-  refreshTokens RefreshToken[] @relation("UserRefreshTokens")
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  password       String?
+  role           String
+  createdAt      DateTime        @default(now())
+  name           String
+  updatedAt      DateTime        @updatedAt
+  courses        Course[]        @relation("InstructorCourses")
+  enrollments    Enrollment[]
+  progress       Progress[]
+  refreshTokens  RefreshToken[]  @relation("UserRefreshTokens")
+  reviews        Review[]
+  reviewComments ReviewComment[]
 }
 
 model Category {
@@ -51,6 +53,7 @@ model Course {
   instructor   User         @relation("InstructorCourses", fields: [instructorId], references: [id])
   enrollments  Enrollment[]
   sessions     Session[]
+  reviews      Review[]
 }
 
 model Session {
@@ -91,7 +94,40 @@ model RefreshToken {
   id        Int      @id @default(autoincrement())
   token     String   @unique
   userId    Int
-  user      User     @relation("UserRefreshTokens", fields: [userId], references: [id]) // <-- Same relation name here
+  user      User     @relation("UserRefreshTokens", fields: [userId], references: [id])
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Review {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  courseId     Int
+  rating       Int // 1 to 5 stars
+  text         String?
+  helpfulCount Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user     User            @relation(fields: [userId], references: [id])
+  course   Course          @relation(fields: [courseId], references: [id])
+  comments ReviewComment[]
+
+  @@unique([userId, courseId])
+}
+
+model ReviewComment {
+  id           Int      @id @default(autoincrement())
+  reviewId     Int
+  userId       Int
+  text         String
+  parentId     Int? // nullable for top-level comments
+  helpfulCount Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  review  Review          @relation(fields: [reviewId], references: [id])
+  user    User            @relation(fields: [userId], references: [id])
+  parent  ReviewComment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies ReviewComment[] @relation("CommentReplies")
 }
