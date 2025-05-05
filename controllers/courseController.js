@@ -138,6 +138,8 @@ export const deleteCourse = async (req, res, next) => {
     await courseService.deleteCourse(req.params.id, req.user);
     sendResponse(res, 200, null, 'Course deleted');
   } catch (error) {
+    console.error('Delete course error:', error); // Add logging for debugging
     next(error);
   }
 };
+

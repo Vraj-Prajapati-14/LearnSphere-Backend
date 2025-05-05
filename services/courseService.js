@@ -223,10 +223,11 @@ export const updateCourse = async (id, courseData, user) => {
     // include: { sessions: true },
   });
 };
-
 export const deleteCourse = async (id, user) => {
+  const courseId = parseInt(id);
+
   const course = await prisma.course.findUnique({
-    where: { id: parseInt(id) },
+    where: { id: courseId },
   });
 
   if (!course) {
@@ -236,17 +237,33 @@ export const deleteCourse = async (id, user) => {
   if (course.instructorId !== user.id) {
     throw new AppError('Unauthorized', 403);
   }
-  await prisma.enrollment.deleteMany({
-    where: { courseId: parseInt(id) },
-  });
-  // First delete all sessions associated with the course
-  await prisma.session.deleteMany({
-    where: { courseId: parseInt(id) },
+
+  // Delete reviews related to the course (if applicable)
+  await prisma.review.deleteMany({
+    where: { courseId },
   });
 
-  // Then delete the course
+  // Delete progress tracking related to enrollments (if applicable)
+  await prisma.progress.deleteMany({
+    where: {
+      enrollment: {
+        courseId,
+      },
+    },
+  });
+
+  // Delete enrollments
+  await prisma.enrollment.deleteMany({
+    where: { courseId },
+  });
+
+  // Delete sessions
+  await prisma.session.deleteMany({
+    where: { courseId },
+  });
+
+  // Finally delete the course
   await prisma.course.delete({
-    where: { id: parseInt(id) },
+    where: { id: courseId },
   });
 };
-
