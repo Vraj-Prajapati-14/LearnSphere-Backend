@@ -100,27 +100,63 @@ export const updateSession = async (courseId, sessionId, sessionData, user) => {
 };
 
 export const deleteSession = async (courseId, sessionId, user) => {
-  const course = await prisma.course.findUnique({
-    where: { id: parseInt(courseId) },
-  });
+  try {
+    if (!user) {
+      throw new AppError('Unauthorized: No user authenticated', 401);
+    }
 
-  if (!course) {
-    throw new AppError('Course not found', 404);
+    console.log(`Attempting to delete session: courseId=${courseId}, sessionId=${sessionId}, userId=${user.id}`);
+
+    const course = await prisma.course.findUnique({
+      where: { id: parseInt(courseId) },
+    });
+    if (!course) {
+      throw new AppError('Course not found', 404);
+    }
+    if (course.instructorId !== user.id) {
+      throw new AppError('Unauthorized: You are not the instructor of this course', 403);
+    }
+
+    const session = await prisma.session.findFirst({
+      where: {
+        id: parseInt(sessionId),
+        courseId: parseInt(courseId),
+      },
+    });
+    if (!session) {
+      throw new AppError('Session not found or does not belong to this course', 404);
+    }
+
+    console.log(`Deleting Progress records for sessionId: ${sessionId}`);
+    const progressDeleteResult = await prisma.progress.deleteMany({
+      where: { sessionId: parseInt(sessionId) },
+    });
+    console.log(`Deleted ${progressDeleteResult.count} Progress records`);
+
+    console.log(`Deleting Session id: ${sessionId}`);
+    await prisma.session.delete({
+      where: { id: parseInt(sessionId) },
+    });
+
+    return { message: 'Session deleted successfully' };
+  } catch (error) {
+    console.error('Detailed error in deleteSession:', {
+      message: error.message,
+      code: error.code,
+      meta: error.meta,
+      stack: error.stack,
+      courseId,
+      sessionId,
+      userId: user?.id,
+    });
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2003') {
+        throw new AppError('Cannot delete session due to existing progress records', 400);
+      }
+      if (error.code === 'P2025') {
+        throw new AppError('Session not found', 404);
+      }
+    }
+    throw error instanceof AppError ? error : new AppError('Failed to delete session', 500);
   }
-
-  if (course.instructorId !== user.id) {
-    throw new AppError('Unauthorized', 403);
-  }
-
-  const session = await Session.findUnique({  // Use Session.findUnique
-    where: { id: parseInt(sessionId) },
-  });
-
-  if (!session || session.courseId !== parseInt(courseId)) {
-    throw new AppError('Session not found', 404);
-  }
-
-  await Session.delete({  // Use Session.delete
-    where: { id: parseInt(sessionId) },
-  });
 };

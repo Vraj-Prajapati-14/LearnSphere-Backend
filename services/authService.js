@@ -3,7 +3,6 @@ import { hashPassword, comparePassword } from '../utils/bcrypt.js';
 import { generateAccessToken, generateRefreshToken } from '../config/jwt.js';
 import prisma from '../config/database.js';
 
-// In authService.js
 export const register = async ({ name, email, password, role }) => {
   const existingUser = await findUserByEmail(email);
   if (existingUser) throw new Error('Email already exists');
@@ -12,9 +11,6 @@ export const register = async ({ name, email, password, role }) => {
 
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
-
-  // Delete existing refresh tokens for the user
-  await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
 
   await prisma.refreshToken.create({
     data: {
@@ -36,9 +32,6 @@ export const login = async ({ email, password }) => {
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
 
-  // Delete existing refresh tokens for the user
-  await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
-
   await prisma.refreshToken.create({
     data: {
       token: refreshToken,
@@ -46,6 +39,7 @@ export const login = async ({ email, password }) => {
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     },
   });
-console.log('Stored refresh token:', refreshToken);
+
+  console.log('Stored refresh token:', refreshToken);
   return { user, accessToken, refreshToken };
 };

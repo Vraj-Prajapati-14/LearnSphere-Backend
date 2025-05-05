@@ -49,11 +49,17 @@ export const updateSession = async (req, res, next) => {
   }
 };
 
-export const deleteSession = async (req, res, next) => {
+export const deleteSession = async (req, res) => {
   try {
-    await sessionService.deleteSession(req.params.courseId, req.params.id, req.user);
-    sendResponse(res, 200, null, 'Session deleted successfully.');
+    const { courseId, sessionId } = req.params;
+    console.log(`Controller: Deleting session: courseId=${courseId}, sessionId=${sessionId}, userId=${req.user?.id}`);
+    const result = await sessionService.deleteSession(courseId, sessionId, req.user);
+    sendResponse(res, 200, null, result.message);
   } catch (error) {
-    next(error);
+    console.error('Delete session controller error:', {
+      message: error.message,
+      status: error.status || 500,
+    });
+    sendResponse(res, error.status || 500, null, error.message);
   }
 };

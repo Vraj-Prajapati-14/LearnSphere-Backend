@@ -235,35 +235,62 @@ export const deleteCourse = async (id, user) => {
   }
 
   if (course.instructorId !== user.id) {
-    throw new AppError('Unauthorized', 403);
+    throw new AppError('Unauthorized: You are not the instructor of this course', 403);
   }
 
-  // Delete reviews related to the course (if applicable)
-  await prisma.review.deleteMany({
-    where: { courseId },
-  });
+  try {
+    await prisma.$transaction([
+      // Delete ReviewComment records first (dependent on Review)
+      prisma.reviewComment.deleteMany({
+        where: {
+          review: {
+            courseId,
+          },
+        },
+      }),
+      // Delete Review records
+      prisma.review.deleteMany({
+        where: { courseId },
+      }),
+      // Delete Progress records
+      prisma.progress.deleteMany({
+        where: {
+          enrollment: {
+            courseId,
+          },
+        },
+      }),
+      // Delete Enrollment records
+      prisma.enrollment.deleteMany({
+        where: { courseId },
+      }),
+      // Delete Session records
+      prisma.session.deleteMany({
+        where: { courseId },
+      }),
+      // Delete Course
+      prisma.course.delete({
+        where: { id: courseId },
+      }),
+    ]);
 
-  // Delete progress tracking related to enrollments (if applicable)
-  await prisma.progress.deleteMany({
-    where: {
-      enrollment: {
-        courseId,
-      },
-    },
-  });
-
-  // Delete enrollments
-  await prisma.enrollment.deleteMany({
-    where: { courseId },
-  });
-
-  // Delete sessions
-  await prisma.session.deleteMany({
-    where: { courseId },
-  });
-
-  // Finally delete the course
-  await prisma.course.delete({
-    where: { id: courseId },
-  });
+    console.log(`Successfully deleted course id: ${courseId}`);
+    return { message: 'Course deleted successfully' };
+  } catch (error) {
+    console.error('Detailed error in deleteCourse:', {
+      message: error.message,
+      code: error.code,
+      meta: error.meta,
+      stack: error.stack,
+    });
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2003') {
+        throw new AppError('Cannot delete course due to foreign key constraints', 400);
+      }
+      if (error.code === 'P2025') {
+        throw new AppError('Course not found', 404);
+      }
+    }
+    throw new AppError('Failed to delete course', 500);
+  }
 };
