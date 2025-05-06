@@ -9,6 +9,7 @@ const env={
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
+  RECAPTCHA_SECRET_KEY:process.env.RECAPTCHA_SECRET_KEY,
 }
 
 for(const [key,value] of Object.entries(env)){

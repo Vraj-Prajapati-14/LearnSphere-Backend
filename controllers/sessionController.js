@@ -51,8 +51,20 @@ export const updateSession = async (req, res, next) => {
 
 export const deleteSession = async (req, res) => {
   try {
-    const { courseId, sessionId } = req.params;
+    const { courseId,id } = req.params;
+    const sessionId=id;
+    console.log('req.params:', req.params);
     console.log(`Controller: Deleting session: courseId=${courseId}, sessionId=${sessionId}, userId=${req.user?.id}`);
+
+    if (!sessionId || isNaN(parseInt(sessionId))) {
+      console.error('Invalid sessionId in controller:', sessionId);
+      return sendResponse(res, 400, null, 'Invalid session ID');
+    }
+    if (!courseId || isNaN(parseInt(courseId))) {
+      console.error('Invalid courseId in controller:', courseId);
+      return sendResponse(res, 400, null, 'Invalid course ID');
+    }
+
     const result = await sessionService.deleteSession(courseId, sessionId, req.user);
     sendResponse(res, 200, null, result.message);
   } catch (error) {
