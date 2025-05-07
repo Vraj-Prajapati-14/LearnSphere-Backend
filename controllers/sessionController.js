@@ -3,18 +3,24 @@ import { sendResponse } from '../utils/response.js';
 
 export const getSessions = async (req, res, next) => {
   try {
-    const sessions = await sessionService.getSessions(req.params.courseId, req.user);
+    const courseId = parseInt(req.params.courseId);
+    const { page = 1, limit = 5 } = req.query;
+    const sessions = await sessionService.getSessions(courseId, req.user, {
+      page: parseInt(page),
+      limit: parseInt(limit),
+    });
     sendResponse(res, 200, sessions);
   } catch (error) {
     next(error);
   }
 };
 
+
 export const getSessionById = async (req, res) => {
   const { courseId, id } = req.params;
 
   try {
-    const session = await sessionService.getSessionById(courseId, id);  // Adjusted here
+    const session = await sessionService.getSessionById(courseId, id);  
     sendResponse(res, 200, session);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch session' });

@@ -1,4 +1,3 @@
-
 import Joi from 'joi';
 
 export const createCategoryDto = Joi.object({

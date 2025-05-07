@@ -6,10 +6,8 @@ import { createReviewDto, createCommentDto } from '../dtos/review.dto.js';
 
 const router = express.Router();
 
-// Notice courseId is now part of the URL, not the body.
 router.post('/:courseId', authMiddleware(['Student']), validateDto(createReviewDto), createReview);
 
-// Comment on a review, passing reviewId as part of the URL.
 router.post('/comment/:reviewId', authMiddleware(['Student', 'Instructor']), validateDto(createCommentDto), commentOnReview);
 
 router.get('/course/:courseId', getReviewsByCourse);

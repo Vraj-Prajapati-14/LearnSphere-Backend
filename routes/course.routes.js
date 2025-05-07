@@ -8,18 +8,14 @@ import sessionRoutes from './session.routes.js';
 
 const router = express.Router();
 
-// Mount session routes as a sub-router
 router.use('/:courseId/sessions', sessionRoutes);
 
-// Route to get all categories (for dropdown)
 router.get('/categories', getCategories);
 
-// Route to get all courses
 router.get('/allcourse', allcourse);
 router.get('/:id/details', getCourseDetails);
 router.get('/', authMiddleware(['Student', 'Instructor']), validateDto(courseQueryDto), getCourses);
 
-// Route to create a course
 router.post(
   '/',
   authMiddleware(['Instructor']),
@@ -28,7 +24,6 @@ router.post(
   createCourse
 );
 
-// Route to get course by ID
 router.get(
   '/:id',
   authMiddleware(['Student', 'Instructor']),
@@ -36,7 +31,6 @@ router.get(
   getCourseById
 );
 
-// Route to update a course
 router.put(
   '/:id',
   authMiddleware(['Instructor']),
@@ -45,7 +39,7 @@ router.put(
   updateCourse
 );
 
-// Route to delete a course
+
 router.delete('/:id', authMiddleware(['Instructor']), validateDto(courseIdDto), deleteCourse);
 
 export default router;

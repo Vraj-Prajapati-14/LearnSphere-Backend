@@ -13,7 +13,11 @@ export const getCategories = async (req, res, next) => {
 
 export const allcourse = async (req, res, next) => {
   try {
-    const courses = await courseService.allcourse(req.user);
+    const { page = 1, limit = 10 } = req.query;
+    const courses = await courseService.allcourse(req.user, {
+      page: parseInt(page),
+      limit: parseInt(limit),
+    });
     sendResponse(res, 200, courses);
   } catch (error) {
     next(error);
@@ -31,7 +35,12 @@ export const getCourseDetails = async (req, res, next) => {
 
 export const getCourses = async (req, res, next) => {
   try {
-    const courses = await courseService.getCourses(req.query, req.user);
+    const { instructorId, page = 1, limit = 10 } = req.query;
+    const courses = await courseService.getCourses(
+      { instructorId: instructorId ? parseInt(instructorId) : undefined },
+      req.user,
+      { page: parseInt(page), limit: parseInt(limit) }
+    );
     sendResponse(res, 200, courses);
   } catch (error) {
     next(error);

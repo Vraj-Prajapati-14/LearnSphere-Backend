@@ -17,19 +17,16 @@ const setCookies = (res, user, accessToken, refreshToken) => {
     sameSite: isProduction ? 'Strict' : 'Lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
-  // Only set user cookie if it doesn't exist or needs update
-  if (!res.get('user') || JSON.parse(res.get('user') || '{}').id !== user.id) {
-    res.cookie('user', JSON.stringify({
-      id: user.id,
-      role: user.role,
-      name: user.name,
-      email: user.email,
-    }), {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      secure: isProduction,
-      sameSite: isProduction ? 'Strict' : 'Lax',
-    });
-  }
+  res.cookie('user', JSON.stringify({
+    id: user.id,
+    role: user.role,
+    name: user.name,
+    email: user.email,
+  }), {
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    secure: isProduction,
+    sameSite: isProduction ? 'Strict' : 'Lax',
+  });
 };
 
 export const registerController = async (req, res) => {
@@ -62,6 +59,9 @@ export const validateToken = async (req, res) => {
   try {
     const user = req.user;
     const token = req.cookies.token;
+    if (!token) {
+      return sendResponse(res, 401, null, 'Access token missing');
+    }
     sendResponse(res, 200, {
       user: { id: user.id, role: user.role, name: user.name, email: user.email },
       token,
@@ -72,7 +72,7 @@ export const validateToken = async (req, res) => {
 };
 
 export const refreshTokenController = async (req, res) => {
-  const { refreshToken } = req.cookies;
+  const refreshToken = req.cookies.refreshToken;
 
   if (!refreshToken) {
     res.clearCookie('user');
@@ -83,16 +83,13 @@ export const refreshTokenController = async (req, res) => {
   try {
     const payload = verifyRefreshToken(refreshToken);
     const storedToken = await prisma.refreshToken.findFirst({
-      where: { userId: payload.id },
+      where: { userId: payload.id, token: refreshToken },
     });
 
-    if (!storedToken || storedToken.token !== refreshToken) {
+    if (!storedToken) {
       res.clearCookie('user');
       res.clearCookie('token');
       res.clearCookie('refreshToken');
-      if (storedToken) {
-        await prisma.refreshToken.delete({ where: { id: storedToken.id } });
-      }
       return sendResponse(res, 403, null, 'Invalid refresh token');
     }
 
@@ -116,7 +113,6 @@ export const refreshTokenController = async (req, res) => {
     const newAccessToken = generateAccessToken(user);
     const newRefreshToken = generateRefreshToken(user);
 
-    // Update the existing refresh token instead of creating a new one
     await prisma.refreshToken.update({
       where: { id: storedToken.id },
       data: {
@@ -132,6 +128,7 @@ export const refreshTokenController = async (req, res) => {
       token: newAccessToken,
     });
   } catch (err) {
+    console.error('Refresh token error:', err);
     res.clearCookie('user');
     res.clearCookie('token');
     res.clearCookie('refreshToken');
@@ -141,8 +138,8 @@ export const refreshTokenController = async (req, res) => {
 };
 
 export const logoutController = async (req, res) => {
-  const { refreshToken } = req.cookies;
-  
+  const refreshToken = req.cookies.refreshToken;
+
   if (refreshToken) {
     await prisma.refreshToken.deleteMany({ where: { token: refreshToken } });
   }
@@ -150,6 +147,6 @@ export const logoutController = async (req, res) => {
   res.clearCookie('user');
   res.clearCookie('token');
   res.clearCookie('refreshToken');
-  
+
   sendResponse(res, 200, null, 'Logged out successfully');
 };

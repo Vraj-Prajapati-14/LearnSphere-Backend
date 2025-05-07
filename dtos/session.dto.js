@@ -15,7 +15,6 @@ export const updateSessionDto = Joi.object({
 
 
 export const sessionIdDto = Joi.object({
-  // Since courseId and id are in req.params, we don't need them in req.body
   courseId: Joi.number().integer().required(),
   id: Joi.number().integer().required(),
 }).unknown(); 

@@ -11,7 +11,6 @@ export const getUserProgress = async (userId, sessionId) => {
 };
 
 export const getCourseProgress = async (user, courseId) => {
-  // Fetch course and sessions
   const course = await prisma.course.findUnique({
     where: { id: Number(courseId) },
     include: { sessions: true },
@@ -21,18 +20,15 @@ export const getCourseProgress = async (user, courseId) => {
   const totalSessions = course.sessions.length;
 
   if (user.role === 'Instructor') {
-    // Verify instructor owns the course
     if (course.instructorId !== user.id) {
       throw new AppError('Unauthorized: You are not the instructor of this course', 403);
     }
 
-    // Fetch enrollments for the course
     const enrollments = await prisma.enrollment.findMany({
       where: { courseId: Number(courseId) },
       include: { user: { select: { id: true, name: true, email: true } } },
     });
 
-    // Fetch progress for all enrolled students
     const progressRecords = await prisma.progress.findMany({
       where: {
         session: { courseId: Number(courseId) },
@@ -41,14 +37,12 @@ export const getCourseProgress = async (user, courseId) => {
       include: { session: true },
     });
 
-    // Map progress by userId
     const progressByUser = progressRecords.reduce((acc, p) => {
       if (!acc[p.userId]) acc[p.userId] = [];
       acc[p.userId].push(p);
       return acc;
     }, {});
 
-    // Calculate progress for each student
     return enrollments.map((enrollment) => {
       const userProgress = progressByUser[enrollment.userId] || [];
       const completedSessions = userProgress.filter((p) => p.isCompleted).length;
@@ -62,7 +56,6 @@ export const getCourseProgress = async (user, courseId) => {
     });
   }
 
-  // Student role: Return progress for the requesting user
   const progress = await prisma.progress.findMany({
     where: {
       userId: user.id,

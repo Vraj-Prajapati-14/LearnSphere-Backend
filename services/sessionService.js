@@ -1,11 +1,10 @@
 import prisma from '../config/database.js';
 import { AppError } from '../utils/errorHandler.js';
 
-export const getSessions = async (courseId, user) => {
+export const getSessions = async (courseId, user, { page = 1, limit = 5 } = {}) => {
   try {
     const course = await prisma.course.findUnique({
       where: { id: parseInt(courseId) },
-      include: { sessions: true },
     });
 
     if (!course) {
@@ -16,7 +15,28 @@ export const getSessions = async (courseId, user) => {
       throw new AppError('Unauthorized', 403);
     }
 
-    return course.sessions;
+    const skip = (page - 1) * limit;
+
+    const [sessions, total] = await Promise.all([
+      prisma.session.findMany({
+        where: { courseId: parseInt(courseId) },
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'asc' },
+      }),
+      prisma.session.count({ where: { courseId: parseInt(courseId) } }),
+    ]);
+
+    return {
+      sessions,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        hasNext: page < Math.ceil(total / limit),
+      },
+    };
   } catch (error) {
     console.error('Error in getSessions:', error);
     if (error instanceof AppError) throw error;

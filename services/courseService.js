@@ -1,50 +1,116 @@
 import prisma from '../config/database.js';
 import { AppError } from '../utils/errorHandler.js';
 
-export const allcourse = async (user) => {
+
+export const allcourse = async (user, { page = 1, limit = 10 } = {}) => {
   try {
+    const skip = (page - 1) * limit;
+
     if (!user) {
+      const [courses, total] = await Promise.all([
+        prisma.course.findMany({
+          where: { isPublished: true },
+          skip,
+          take: limit,
+          include: {
+            sessions: { select: { id: true, title: true } },
+            category: { select: { id: true, name: true } },
+          },
+          orderBy: { createdAt: 'desc' },
+        }),
+        prisma.course.count({ where: { isPublished: true } }),
+      ]);
+
+      console.log('Unauthenticated allcourse:', { courses: courses.length, total, page, limit });
+
       return {
         enrolledCourses: [],
-        remainingCourses: await prisma.course.findMany({
-          include: {
-            sessions: true,
-            category: true,
-          },
-        }),
+        remainingCourses: courses,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit),
+          hasNext: page < Math.ceil(total / limit),
+        },
       };
     }
 
     const enrolledCourses = await prisma.enrollment.findMany({
       where: { userId: user.id },
-      include: {
-        course: {
-          include: {
-            sessions: true,
-            category: true,
-          },
-        },
-      },
+      select: { courseId: true },
     });
-
     const enrolledIds = enrolledCourses.map((e) => e.courseId);
+    const [remainingCourses, remainingTotal] = await Promise.all([
+      prisma.course.findMany({
+        where: {
+          id: { notIn: enrolledIds },
+          isPublished: true,
+        },
+        skip,
+        take: limit,
+        include: {
+          sessions: { select: { id: true, title: true } },
+          category: { select: { id: true, name: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.course.count({
+        where: {
+          id: { notIn: enrolledIds },
+          isPublished: true,
+        },
+      }),
+    ]);
 
-    const remainingCourses = await prisma.course.findMany({
-      where: {
-        id: { notIn: enrolledIds },
-      },
-      include: {
-        sessions: true,
-        category: true,
-      },
+    const [enrolledCoursesData, enrolledTotal] = await Promise.all([
+      prisma.course.findMany({
+        where: {
+          id: { in: enrolledIds },
+          isPublished: true,
+        },
+        skip,
+        take: limit,
+        include: {
+          sessions: { select: { id: true, title: true } },
+          category: { select: { id: true, name: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.course.count({
+        where: {
+          id: { in: enrolledIds },
+          isPublished: true,
+        },
+      }),
+    ]);
+
+    const total = remainingTotal + enrolledTotal;
+
+    console.log('Authenticated allcourse:', {
+      enrolled: enrolledCoursesData.length,
+      remaining: remainingCourses.length,
+      total,
+      page,
+      limit,
     });
 
     return {
-      enrolledCourses: enrolledCourses.map((e) => e.course),
+      enrolledCourses: enrolledCoursesData,
       remainingCourses,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        hasNext: page < Math.ceil(total / limit),
+      },
     };
   } catch (error) {
-    console.error('Error in allcourse:', error);
+    console.error('Error in allcourse:', {
+      message: error.message,
+      stack: error.stack,
+    });
     throw new AppError('Failed to fetch courses', 500);
   }
 };
@@ -85,42 +151,62 @@ export const getCourseDetails = async (id) => {
   }
 };
 
-export const getCourses = async ({ instructorId }, user) => {
+
+export const getCourses = async ({ instructorId }, user, { page = 1, limit = 10 } = {}) => {
   try {
-    if (user.role === 'Instructor') {
+    const skip = (page - 1) * limit;
+    let where = {};
+
+    if (user && user.role === 'Instructor') {
       if (instructorId && parseInt(instructorId) !== user.id) {
         throw new AppError('Unauthorized', 403);
       }
-
-      return await prisma.course.findMany({
-        where: { instructorId: user.id },
-        include: { sessions: true },
-      });
-    }
-
-    if (user.role === 'Student') {
+      where.instructorId = user.id;
+    } else if (user && user.role === 'Student') {
       const enrolledCourses = await prisma.enrollment.findMany({
         where: { userId: user.id },
         select: { courseId: true },
       });
-
       const enrolledIds = enrolledCourses.map((e) => e.courseId);
-
-      return await prisma.course.findMany({
-        where: {
-          isPublished: true,
-          id: { notIn: enrolledIds },
-        },
-        include: { sessions: true },
-      });
+      where = {
+        isPublished: true,
+        id: { notIn: enrolledIds },
+      };
+    } else {
+      where.isPublished = true;
     }
 
-    return await prisma.course.findMany({
-      where: { isPublished: true },
-      include: { sessions: true },
-    });
+    const [courses, total] = await Promise.all([
+      prisma.course.findMany({
+        where,
+        skip,
+        take: limit,
+        include: {
+          sessions: { select: { id: true, title: true } },
+          category: { select: { id: true, name: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.course.count({ where }),
+    ]);
+
+    console.log('getCourses:', { courses: courses.length, total, page, limit });
+
+    return {
+      courses,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        hasNext: page < Math.ceil(total / limit),
+      },
+    };
   } catch (error) {
-    console.error('Error in getCourses:', error);
+    console.error('Error in getCourses:', {
+      message: error.message,
+      stack: error.stack,
+    });
     if (error instanceof AppError) throw error;
     throw new AppError('Internal Server Error', 500);
   }

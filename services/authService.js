@@ -12,7 +12,6 @@ export const register = async ({ name, email, password, role }) => {
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
 
-  // Delete any existing refresh tokens for this user
   await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
 
   await prisma.refreshToken.create({
@@ -35,7 +34,6 @@ export const login = async ({ email, password }) => {
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
 
-  // Delete any existing refresh tokens for this user
   await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
 
   await prisma.refreshToken.create({
